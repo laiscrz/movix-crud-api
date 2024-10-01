@@ -2,21 +2,33 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repositories;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controlador para gerenciar operações relacionadas a filmes.
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
         private readonly IRepository<MovieModel> _movieRepository;
 
+        /// <summary>
+        /// Construtor que inicializa uma nova instância da classe <see cref="MoviesController"/>.
+        /// </summary>
+        /// <param name="movieRepository">Repositório para gerenciar filmes.</param>
         public MoviesController(IRepository<MovieModel> movieRepository)
         {
             _movieRepository = movieRepository;
         }
 
-        // GET: api/movies
+        /// <summary>
+        /// Obtém todos os filmes.
+        /// </summary>
+        /// <returns>Uma lista de <see cref="MovieModel"/>.</returns>
         [HttpGet]
         [SwaggerOperation(Summary = "Obter todos os filmes", Description = "Recupera uma lista de todos os filmes.")]
         [Tags("Leitura")]
@@ -27,7 +39,11 @@ namespace WebApi.Controllers
             return Ok(movies);
         }
 
-        // GET: api/movies/{id}
+        /// <summary>
+        /// Obtém um filme pelo ID.
+        /// </summary>
+        /// <param name="id">O ID do filme a ser recuperado.</param>
+        /// <returns>O filme correspondente ao ID.</returns>
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Obter um filme pelo ID", Description = "Recupera um filme pelo seu identificador único.")]
         [Tags("Leitura")]
@@ -43,7 +59,11 @@ namespace WebApi.Controllers
             return Ok(movie);
         }
 
-        // POST: api/movies
+        /// <summary>
+        /// Cria um novo filme.
+        /// </summary>
+        /// <param name="movie">O filme a ser criado.</param>
+        /// <returns>O filme recém-criado.</returns>
         [HttpPost]
         [SwaggerOperation(Summary = "Criar um novo filme", Description = "Adiciona um novo filme à coleção.")]
         [Tags("Criação")]
@@ -59,7 +79,12 @@ namespace WebApi.Controllers
             return CreatedAtAction(nameof(GetMovieByIdAsync), new { id = movie.Id }, movie);
         }
 
-        // PUT: api/movies/{id}
+        /// <summary>
+        /// Atualiza um filme existente.
+        /// </summary>
+        /// <param name="id">O ID do filme a ser atualizado.</param>
+        /// <param name="movie">O filme com as novas informações.</param>
+        /// <returns>Um resultado indicando o sucesso da operação.</returns>
         [HttpPut("{id}")]
         [SwaggerOperation(Summary = "Atualizar um filme", Description = "Atualiza um filme existente.")]
         [Tags("Atualização")]
@@ -76,7 +101,11 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/movies/{id}
+        /// <summary>
+        /// Deleta um filme pelo ID.
+        /// </summary>
+        /// <param name="id">O ID do filme a ser removido.</param>
+        /// <returns>Um resultado indicando o sucesso da operação.</returns>
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Deletar um filme", Description = "Remove um filme da coleção.")]
         [Tags("Exclusão")]
