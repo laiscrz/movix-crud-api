@@ -125,6 +125,20 @@ A documentação da API está disponível em Swagger, que fornece uma interface 
 
 ---
 
+## 💻 Tecnologias
+
+Este projeto utiliza as seguintes ferramentas e tecnologias:
+
+### 🖥️ Ambientes de Desenvolvimento Integrado (IDEs):
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
+### 📚 Linguagem de Programação:
+![CSharp](https://img.shields.io/badge/CSharp-4CAF50?style=for-the-badge&logo=csharp&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+---
+
 ## 🚀 Execução do Projeto
 
 ### 📋 Pré-requisitos
@@ -154,19 +168,6 @@ A documentação da API está disponível em Swagger, que fornece uma interface 
 
 ---
 
-## 💻 Tecnologias
-
-Este projeto utiliza as seguintes ferramentas e tecnologias:
-
-### 🖥️ Ambientes de Desenvolvimento Integrado (IDEs):
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
-### 📚 Linguagem de Programação:
-![CSharp](https://img.shields.io/badge/CSharp-4CAF50?style=for-the-badge&logo=csharp&logoColor=white)
-![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-
----
 
 > Este README fornece todas as informações necessárias para utilizar a Movix CRUD API de forma eficaz.
-> **Aproveite sua experiência com o Movix! 🎥**
+> **Aproveite sua experiência com o Movix API! 🎥**
