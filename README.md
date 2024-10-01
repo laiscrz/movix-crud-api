@@ -110,6 +110,18 @@ classDiagram
   "message": "Filme excluído com sucesso."
 }
 ```
+---
+
+## 📚 Documentação
+
+A documentação da API está disponível em Swagger, que fornece uma interface detalhada sobre os endpoints e como utilizá-los. Acesse a documentação através do seguinte link:
+
+```https
+    http://localhost:5072/swagger
+```
+
+> [!NOTE]
+> O link Swagger estará disponível apenas após iniciar o projeto localmente.
 
 ---
 
