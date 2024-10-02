@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
 using Models;
 
 namespace Tests.Unit.Models
@@ -9,7 +10,7 @@ namespace Tests.Unit.Models
         public void MovieModel_Deve_Criar_Instancia_Valida()
         {
             // Arrange
-            var movieId = "1";
+            var movieId = ObjectId.GenerateNewId().ToString();  // Gerar um ObjectId válido
             var titulo = "A Origem";
             var diretor = "Christopher Nolan";
             var generos = new List<string> { "Ficção Científica", "Suspense" };
@@ -19,7 +20,7 @@ namespace Tests.Unit.Models
             // Act
             var filme = new MovieModel
             {
-                Id = movieId,
+                Id = ObjectId.Parse(movieId),  // Conversão correta para ObjectId
                 Titulo = titulo,
                 Diretor = diretor,
                 Genero = generos,
@@ -28,7 +29,7 @@ namespace Tests.Unit.Models
             };
 
             // Assert
-            Assert.Equal(movieId, filme.Id);
+            Assert.Equal(movieId, filme.Id.ToString());  // Comparação do ObjectId como string
             Assert.Equal(titulo, filme.Titulo);
             Assert.Equal(diretor, filme.Diretor);
             Assert.Equal(generos, filme.Genero);
@@ -42,7 +43,7 @@ namespace Tests.Unit.Models
             // Arrange
             var filme = new MovieModel
             {
-                Id = "1",
+                Id = ObjectId.GenerateNewId(),
                 Diretor = "Christopher Nolan",
                 Genero = new List<string> { "Ficção Científica" },
                 AnoLancamento = 2010,
@@ -50,7 +51,7 @@ namespace Tests.Unit.Models
             };
 
             // Act & Assert
-            Assert.Throws<ValidationException>(() => 
+            Assert.Throws<ValidationException>(() =>
             {
                 if (string.IsNullOrEmpty(filme.Titulo))
                 {
@@ -65,7 +66,7 @@ namespace Tests.Unit.Models
             // Arrange
             var filme = new MovieModel
             {
-                Id = "1",
+                Id = ObjectId.GenerateNewId(),
                 Titulo = "A Origem",
                 Genero = new List<string> { "Ficção Científica" },
                 AnoLancamento = 2010,
@@ -73,7 +74,7 @@ namespace Tests.Unit.Models
             };
 
             // Act & Assert
-            Assert.Throws<ValidationException>(() => 
+            Assert.Throws<ValidationException>(() =>
             {
                 if (string.IsNullOrEmpty(filme.Diretor))
                 {
@@ -90,7 +91,7 @@ namespace Tests.Unit.Models
             // Arrange
             var filme = new MovieModel
             {
-                Id = "1",
+                Id = ObjectId.GenerateNewId(),
                 Titulo = "A Origem",
                 Diretor = "Christopher Nolan",
                 Genero = new List<string> { "Ficção Científica" },
@@ -114,12 +115,12 @@ namespace Tests.Unit.Models
             // Arrange
             var filme = new MovieModel
             {
-                Id = "1",
+                Id = ObjectId.GenerateNewId(),
                 Titulo = "A Origem",
                 Diretor = "Christopher Nolan",
                 Genero = new List<string> { "Ficção Científica" },
                 AnoLancamento = 2010,
-                Sinopse = new string('A', 501) // 501 caracteres
+                Sinopse = new string('A', 501) // Sinopse com mais de 500 caracteres
             };
 
             // Act & Assert

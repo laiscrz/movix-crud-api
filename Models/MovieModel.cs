@@ -60,13 +60,7 @@ namespace Models
         [SwaggerSchema(Title = "Sinopse", Description = "Sinopse do filme. Limite de 500 caracteres.")]
         public string Sinopse { get; set; } = string.Empty;
 
-        public MovieModel(string titulo, string diretor, ICollection<string> genero, int anoLancamento, string sinopse)
-        {
-            Titulo = titulo;
-            Diretor = diretor;
-            Genero = genero ?? new List<string>();
-            AnoLancamento = anoLancamento;
-            Sinopse = sinopse;
-        }
+        public MovieModel() {}
+
     }
 }
