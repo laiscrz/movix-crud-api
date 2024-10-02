@@ -15,6 +15,7 @@ namespace Models
         /// Obtém ou define o identificador único do filme gerado pelo MongoDB.
         /// </summary>
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         [SwaggerSchema(Title = "ID", Description = "Identificador único do filme gerado automaticamente pelo MongoDB.")]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
@@ -49,6 +50,7 @@ namespace Models
         /// </summary>
         [BsonElement("anoLancamento")]
         [Range(1888, 2100, ErrorMessage = "O ano de lançamento deve estar entre 1888 e 2100.")]
+        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
         [SwaggerSchema(Title = "Ano de Lançamento", Description = "Ano de lançamento do filme. Deve estar entre 1888 e 2100.", Nullable = false)]
         public int AnoLancamento { get; set; }
 

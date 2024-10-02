@@ -24,7 +24,7 @@ Accept: application/json
 
 ###
 
-PUT http://localhost:5072/api/movies/66fc9e49172adb6ff3568d6c
+PUT http://localhost:5072/api/movies/66fdaf9f2a3ea2ea1dc4ffc0
 Content-Type: application/json
 Accept: application/json
 
@@ -38,5 +38,5 @@ Accept: application/json
 
 ###
 
-DELETE  http://localhost:5072/api/movies/66fc9e49172adb6ff3568d6c
+DELETE  http://localhost:5072/api/movies/66fdaf9f2a3ea2ea1dc4ffc0
 Content-Type: application/json
