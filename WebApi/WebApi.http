@@ -1,6 +1,42 @@
 @WebApi_HostAddress = http://localhost:5072
 
-GET {{WebApi_HostAddress}}/weatherforecast/
+GET {{WebApi_HostAddress}}/api/movies
 Accept: application/json
 
 ###
+
+GET {{WebApi_HostAddress}}/api/movies/66fc551cc36524a32c05962a
+Accept: application/json
+
+###
+
+POST http://localhost:5072/api/movies
+Content-Type: application/json
+Accept: application/json
+
+{
+    "titulo": "Exemplo de Filme",
+    "diretor": "Diretor Exemplo",
+    "genero": ["AVENTURA"],
+    "anoLancamento": 2023,
+    "sinopse": "Esta é uma sinopse de exemplo para o filme."
+}
+
+###
+
+PUT http://localhost:5072/api/movies/66fc7913be113a4d7fc78920
+Content-Type: application/json
+Accept: application/json
+
+{
+    "titulo": "Exemplo de Filmeeeeeeeeeeeeww",
+    "diretor": "Diretor Exemplo",
+    "genero": ["AVENTURA"],
+    "anoLancamento": 2023,
+    "sinopse": "Esta é uma sinopse de exemplo para o filme."
+}
+
+###
+
+DELETE  http://localhost:5072/api/movies/66fc76ba4b1e56156720c286
+Content-Type: application/json
