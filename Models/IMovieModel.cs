@@ -1,3 +1,5 @@
+using MongoDB.Bson;
+
 namespace Models
 {
     /// <summary>
@@ -8,7 +10,7 @@ namespace Models
         /// <summary>
         /// Obtém ou define o identificador único do filme.
         /// </summary>
-        string Id { get; set; }
+        ObjectId Id { get; set; }
 
         /// <summary>
         /// Obtém ou define o título do filme.

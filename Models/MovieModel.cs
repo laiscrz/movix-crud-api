@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Swashbuckle.AspNetCore.Annotations; 
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Models
 {
@@ -15,9 +15,8 @@ namespace Models
         /// Obtém ou define o identificador único do filme gerado pelo MongoDB.
         /// </summary>
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         [SwaggerSchema(Title = "ID", Description = "Identificador único do filme gerado automaticamente pelo MongoDB.")]
-        public string Id { get; set; } = string.Empty;
+        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
         /// <summary>
         /// Obtém ou define o título do filme.
@@ -43,7 +42,7 @@ namespace Models
         [BsonElement("genero")]
         [Required(ErrorMessage = "Pelo menos um gênero é obrigatório.")]
         [SwaggerSchema(Title = "Gênero", Description = "Lista de gêneros associados ao filme.", Nullable = false)]
-        public ICollection<string> Genero { get; set; } = new List<string>(); 
+        public ICollection<string> Genero { get; set; } = new List<string>();
 
         /// <summary>
         /// Obtém ou define o ano de lançamento do filme.
@@ -60,5 +59,14 @@ namespace Models
         [StringLength(500, ErrorMessage = "A sinopse não pode exceder 500 caracteres.")]
         [SwaggerSchema(Title = "Sinopse", Description = "Sinopse do filme. Limite de 500 caracteres.")]
         public string Sinopse { get; set; } = string.Empty;
+
+        public MovieModel(string titulo, string diretor, ICollection<string> genero, int anoLancamento, string sinopse)
+        {
+            Titulo = titulo;
+            Diretor = diretor;
+            Genero = genero ?? new List<string>();
+            AnoLancamento = anoLancamento;
+            Sinopse = sinopse;
+        }
     }
 }
