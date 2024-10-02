@@ -13,6 +13,7 @@ Explore as funcionalidades disponíveis na API:
 | **🔍 Consultar Detalhes**   | Acesse informações detalhadas sobre um filme específico, como título, diretor, gênero, ano de lançamento e sinopse. |
 | **✏️ Atualizar Filmes**     | Atualize os detalhes de filmes existentes para manter seu catálogo sempre atualizado.        |
 | **❌ Excluir Filmes**       | Remova filmes do catálogo quando não forem mais necessários.                                 |
+| **📅 Filtrar por Ano**      | Obtenha uma lista de filmes lançados em um ano específico.                                   |
 
 ---
 
@@ -43,11 +44,11 @@ classDiagram
 - **Corpo da Requisição:**
 ```json
 {
-  "titulo": "Nome do Filme",
-  "diretor": "Nome do Diretor",
-  "genero": ["Ação", "Aventura"],
-  "anoLancamento": 2024,
-  "sinopse": "Uma breve descrição do filme."
+  "titulo": "Minions: A Origem de Gru",
+  "diretor": "Kyle Balda",
+  "genero": ["Animação", "Aventura", "Comédia"],
+  "anoLancamento": 2022,
+  "sinopse": "No final da década de 1970, um jovem Gru tenta se tornar um supervilão, e conta com a ajuda dos Minions para alcançar seus objetivos."
 }
 ```
 
@@ -60,11 +61,19 @@ classDiagram
 [
   {
     "id": "646cfe3538d5c5a77e7d4e12",
-    "titulo": "Nome do Filme",
-    "diretor": "Nome do Diretor",
-    "genero": ["Ação", "Aventura"],
-    "anoLancamento": 2024,
-    "sinopse": "Uma breve descrição do filme."
+    "titulo": "Minions: A Origem de Gru",
+    "diretor": "Kyle Balda",
+    "genero": ["Animação", "Aventura", "Comédia"],
+    "anoLancamento": 2022,
+    "sinopse": "No final da década de 1970, um jovem Gru tenta se tornar um supervilão, e conta com a ajuda dos Minions para alcançar seus objetivos."
+  },
+  {
+    "id": "646cfe3538d5c5a77e7d4e13",
+    "titulo": "Minions",
+    "diretor": "Pierre Coffin, Kyle Balda",
+    "genero": ["Animação", "Aventura", "Comédia"],
+    "anoLancamento": 2015,
+    "sinopse": "Os Minions se unem a um vilão para conquistar o mundo."
   }
 ]
 ```
@@ -77,11 +86,11 @@ classDiagram
 ```json
 {
   "id": "646cfe3538d5c5a77e7d4e12",
-  "titulo": "Nome do Filme",
-  "diretor": "Nome do Diretor",
-  "genero": ["Ação", "Aventura"],
-  "anoLancamento": 2024,
-  "sinopse": "Uma breve descrição do filme."
+  "titulo": "Minions: A Origem de Gru",
+  "diretor": "Kyle Balda",
+  "genero": ["Animação", "Aventura", "Comédia"],
+  "anoLancamento": 2022,
+  "sinopse": "No final da década de 1970, um jovem Gru tenta se tornar um supervilão, e conta com a ajuda dos Minions para alcançar seus objetivos."
 }
 ```
 
@@ -92,11 +101,17 @@ classDiagram
 - **Corpo da Requisição:**
 ```json
 {
-  "titulo": "Nome Atualizado do Filme",
-  "diretor": "Nome do Diretor Atualizado",
-  "genero": ["Drama", "Comédia"],
-  "anoLancamento": 2024,
-  "sinopse": "Uma nova descrição do filme."
+  "titulo": "Minions: A Origem de Gru (Atualizado)",
+  "diretor": "Kyle Balda",
+  "genero": ["Animação", "Aventura", "Comédia", "Família"],
+  "anoLancamento": 2022,
+  "sinopse": "Um jovem Gru, aspirante a supervilão, conta com a ajuda dos Minions para realizar seus planos."
+}
+```
+- **Resposta:** 
+```json
+{
+  "message": "Filme atualizado com sucesso."
 }
 ```
 
@@ -110,6 +125,28 @@ classDiagram
   "message": "Filme excluído com sucesso."
 }
 ```
+
+### 6. **Obter filmes lançados em um ano específico**
+
+- **Método:** `GET`
+- **Endpoint:** `/api/movies/year/{year}`
+- **Descrição:** Obtém filmes lançados em um ano específico.
+- **Parâmetro:** 
+  - `year` (inteiro) - Ano de lançamento dos filmes.
+- **Exemplo de Resposta para o ano de 2022:**
+```json
+[
+  {
+    "id": "646cfe3538d5c5a77e7d4e12",
+    "titulo": "Minions: A Origem de Gru",
+    "diretor": "Kyle Balda",
+    "genero": ["Animação", "Aventura", "Comédia"],
+    "anoLancamento": 2022,
+    "sinopse": "No final da década de 1970, um jovem Gru tenta se tornar um supervilão, e conta com a ajuda dos Minions para alcançar seus objetivos."
+  }
+]
+```
+
 ---
 
 ## 📚 Documentação
@@ -168,6 +205,11 @@ Este projeto utiliza as seguintes ferramentas e tecnologias:
 
 ---
 
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT. Para mais detalhes, consulte o arquivo [LICENSE](https://github.com/laiscrz/movix-crud-api/blob/main/LICENSE).
+
+---
 
 > Este README fornece todas as informações necessárias para utilizar a Movix CRUD API de forma eficaz.
 > **Aproveite sua experiência com o Movix API! 🎥**
