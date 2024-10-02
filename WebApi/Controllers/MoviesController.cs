@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Repositories;
 using Swashbuckle.AspNetCore.Annotations;
+using DTOs;
+using MongoDB.Bson;
 
 namespace WebApi.Controllers
 {
@@ -12,9 +14,9 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
-        private readonly IRepository<MovieModel> _movieRepository;
+        private readonly IMovieRepository _movieRepository;
 
-        public MoviesController(IRepository<MovieModel> movieRepository)
+        public MoviesController(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
@@ -26,11 +28,12 @@ namespace WebApi.Controllers
         [HttpGet]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter todos os filmes", Description = "Retorna uma lista de todos os filmes.")]
-        [ProducesResponseType(typeof(IEnumerable<MovieModel>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<MovieModel>>> GetAllMovies()
+        [ProducesResponseType(typeof(IEnumerable<MovieResponseDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetAllMovies()
         {
             var movies = await _movieRepository.GetAllAsync();
-            return Ok(movies);
+            var movieDtos = movies.Select(movie => new MovieResponseDTO(movie)).ToList();
+            return Ok(movieDtos);
         }
 
         /// <summary>
@@ -41,43 +44,42 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter filme por ID", Description = "Retorna um filme específico com base no ID.")]
-        [ProducesResponseType(typeof(MovieModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MovieResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<MovieModel>> GetMovieById(string id)
+        public async Task<ActionResult<MovieResponseDTO>> GetMovieById(string id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
             if (movie == null)
             {
                 return NotFound();
             }
-            return Ok(movie);
+            return Ok(new MovieResponseDTO(movie));
         }
 
         /// <summary>
         /// Adiciona um novo filme.
         /// </summary>
-        /// <param name="movie">Modelo do filme a ser adicionado.</param>
+        /// <param name="movieDto">Modelo do filme a ser adicionado.</param>
         /// <returns>Uma ação resultante da criação do filme.</returns>
         [HttpPost]
         [Tags("Criar")]
         [SwaggerOperation(Summary = "Adicionar um novo filme", Description = "Cria um novo filme.")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateMovie([FromBody] MovieModel movie)
+        public async Task<ActionResult> CreateMovie([FromBody] MovieRequestDTO movieDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var movie = movieDto.ToModel();
             await _movieRepository.CreateAsync(movie);
-            return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id.ToString() }, movie);
+
+            var movieResponseDto = new MovieResponseDTO(movie);
+            return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id.ToString() }, movieResponseDto);
         }
 
         /// <summary>
         /// Atualiza um filme existente.
         /// </summary>
         /// <param name="id">ID do filme a ser atualizado.</param>
-        /// <param name="movie">Modelo do filme com as novas informações.</param>
+        /// <param name="movieDto">Modelo do filme com as novas informações.</param>
         /// <returns>Uma ação resultante da atualização do filme.</returns>
         [HttpPut("{id}")]
         [Tags("Atualizar")]
@@ -85,8 +87,13 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateMovie(string id, [FromBody] MovieModel movie)
+        public async Task<ActionResult> UpdateMovie(string id, [FromBody] MovieRequestDTO movieDto)
         {
+            if (!ObjectId.TryParse(id, out var objectId))
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var existingMovie = await _movieRepository.GetByIdAsync(id);
 
             if (existingMovie == null)
@@ -94,10 +101,10 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            // Mantenha o _id do filme existente
-            movie.Id = existingMovie.Id;
+            var movieToUpdate = movieDto.ToModel();
+            movieToUpdate.Id = existingMovie.Id;
 
-            await _movieRepository.UpdateAsync(id, movie);
+            await _movieRepository.UpdateAsync(id, movieToUpdate);
             return NoContent();
         }
 
@@ -113,13 +120,36 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteMovie(string id)
         {
+            if (!ObjectId.TryParse(id, out var objectId))
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var existingMovie = await _movieRepository.GetByIdAsync(id);
             if (existingMovie == null)
             {
                 return NotFound();
             }
+
             await _movieRepository.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("year/{year}")]
+        [Tags("Ler")]
+        [SwaggerOperation(Summary = "Obter filmes por ano", Description = "Retorna uma lista de filmes lançados em um ano específico.")]
+        [ProducesResponseType(typeof(IEnumerable<MovieResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetMoviesByYear(int year)
+        {
+            var movies = await _movieRepository.GetMoviesByYearAsync(year);
+            if (movies == null || !movies.Any())
+            {
+                return NotFound();
+            }
+
+            var movieDtos = movies.Select(movie => new MovieResponseDTO(movie)).ToList();
+            return Ok(movieDtos);
         }
     }
 }

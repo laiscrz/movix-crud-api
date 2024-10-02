@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{9A005FCD-4B36-4D6C-8191-89F7F4D5B22B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{18D68546-68D8-4039-9382-13544F99748B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{9A005FCD-4B36-4D6C-8191-89F7F4D5B22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A005FCD-4B36-4D6C-8191-89F7F4D5B22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A005FCD-4B36-4D6C-8191-89F7F4D5B22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D68546-68D8-4039-9382-13544F99748B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D68546-68D8-4039-9382-13544F99748B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D68546-68D8-4039-9382-13544F99748B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D68546-68D8-4039-9382-13544F99748B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

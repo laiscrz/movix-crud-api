@@ -15,7 +15,7 @@ builder.Services.AddSingleton(sp =>
 
 builder.Services.AddSingleton<MongoDbFactory>();
 
-builder.Services.AddScoped<IRepository<MovieModel>>(sp =>
+builder.Services.AddScoped<IMovieRepository>(sp =>
 {
     var mongoDbFactory = sp.GetRequiredService<MongoDbFactory>();
     var mongoDbSettings = sp.GetRequiredService<MongoDbSettings>();
@@ -48,9 +48,15 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movix API v1");
+        c.RoutePrefix = ""; 
+    });
 }
 
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
