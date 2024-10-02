@@ -10,7 +10,7 @@ namespace Tests.Unit.Models
         public void MovieModel_Deve_Criar_Instancia_Valida()
         {
             // Arrange
-            var movieId = ObjectId.GenerateNewId().ToString();  // Gerar um ObjectId válido
+            var movieId = ObjectId.GenerateNewId().ToString();  
             var titulo = "A Origem";
             var diretor = "Christopher Nolan";
             var generos = new List<string> { "Ficção Científica", "Suspense" };
@@ -20,7 +20,7 @@ namespace Tests.Unit.Models
             // Act
             var filme = new MovieModel
             {
-                Id = ObjectId.Parse(movieId),  // Conversão correta para ObjectId
+                Id = ObjectId.Parse(movieId),  
                 Titulo = titulo,
                 Diretor = diretor,
                 Genero = generos,
@@ -120,7 +120,7 @@ namespace Tests.Unit.Models
                 Diretor = "Christopher Nolan",
                 Genero = new List<string> { "Ficção Científica" },
                 AnoLancamento = 2010,
-                Sinopse = new string('A', 501) // Sinopse com mais de 500 caracteres
+                Sinopse = new string('A', 501) 
             };
 
             // Act & Assert
