@@ -5,38 +5,43 @@ Accept: application/json
 
 ###
 
-GET {{WebApi_HostAddress}}/api/movies/66fc994ac36524a32c0bdf85
+GET {{WebApi_HostAddress}}/api/movies/66fdb2dee4925a38055ba866
 Accept: application/json
 
 ###
 
-POST http://localhost:5072/api/movies
+POST {{WebApi_HostAddress}}/api/movies
 Content-Type: application/json
 Accept: application/json
 
 {
-    "titulo": "Exemplo de Filme",
-    "diretor": "Diretor Exemplo",
-    "genero": ["AVENTURA"],
+    "titulo": "Barbie",
+    "diretor": "Greta Gerwig",
+    "genero": ["Comédia", "Fantasia"],
     "anoLancamento": 2023,
-    "sinopse": "Esta é uma sinopse de exemplo para o filme."
+    "sinopse": "Barbie e Ken embarcam em uma aventura no mundo real após deixar Barbieland, enfrentando os desafios da vida fora de seu universo idealizado."
 }
 
 ###
 
-PUT http://localhost:5072/api/movies/66fdaf9f2a3ea2ea1dc4ffc0
+PUT {{WebApi_HostAddress}}/api/movies/66fdce1f3b46ef3fd43caf1d
 Content-Type: application/json
 Accept: application/json
 
 {
-    "titulo": "Exemplo de Filmeeeeeeeeeeeeww",
-    "diretor": "Diretor Exemplo",
-    "genero": ["AVENTURA"],
+    "titulo": "Barbie: Uma Aventura no Mundo Real",
+    "diretor": "Greta Gerwig",
+    "genero": ["Comédia", "Fantasia"],
     "anoLancamento": 2023,
-    "sinopse": "Esta é uma sinopse de exemplo para o filme."
+    "sinopse": "Barbie e Ken exploram o mundo real e aprendem valiosas lições sobre identidade e aceitação."
 }
 
 ###
 
-DELETE  http://localhost:5072/api/movies/66fdaf9f2a3ea2ea1dc4ffc0
+DELETE  {{WebApi_HostAddress}}/api/movies/66fdce0d3b46ef3fd43caf1b
+Content-Type: application/json
+
+###
+
+GET {{WebApi_HostAddress}}/api/movies/year/2023
 Content-Type: application/json
