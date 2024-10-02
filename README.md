@@ -1,17 +1,22 @@
 # 🎬 Movix CRUD API
 
-**Movix** é uma API intuitiva para gerenciamento de filmes, construída com .NET e MongoDB, permitindo operações de CRUD (Criar, Ler, Atualizar e Excluir) em um catálogo de filmes.
+**Movix** é uma API intuitiva e eficiente projetada para o gerenciamento de filmes, construída com .NET e utilizando o MongoDB como banco de dados. A Movix facilita a realização de operações de CRUD (Criar, Ler, Atualizar e Excluir) em um catálogo de filmes, permitindo que os usuários gerenciem suas coleções de maneira prática e eficaz.
+
+---
 
 ## 📚 Funcionalidades
 
-| Ação                        | Descrição                                                                                     |
-|-----------------------------|-----------------------------------------------------------------------------------------------|
-| **➕ Adicionar Filmes**      | Adicione novos filmes com todos os detalhes relevantes.                                       |
-| **📜 Listar Filmes**        | Obtenha uma lista completa de filmes, com opções de filtro.                                   |
-| **🔍 Consultar Detalhes**   | Acesse informações detalhadas de um filme específico.                                         |
-| **✏️ Atualizar Filmes**     | Atualize detalhes de filmes existentes.                                                       |
-| **❌ Excluir Filmes**       | Remova filmes do catálogo quando não forem mais necessários.                                  |
-| **📅 Filtrar por Ano**      | Liste filmes lançados em um ano específico.                                                  |
+- **➕ Adicionar Filmes**: Adicione novos filmes com todos os detalhes relevantes.
+  
+- **📜 Listar Filmes**: Obtenha uma lista completa de filmes, com opções de filtro.
+  
+- **🔍 Consultar Detalhes**: Acesse informações detalhadas de um filme específico.
+  
+- **✏️ Atualizar Filmes**: Atualize detalhes de filmes existentes.
+  
+- **❌ Excluir Filmes**: Remova filmes do catálogo quando não forem mais necessários.
+  
+- **📅 Filtrar por Ano**: Liste filmes lançados em um ano específico.
 
 ---
 
@@ -28,16 +33,17 @@ movix-crud-api/
 ```
 
 ### Motivos da Arquitetura 🔧
+
 A estrutura do projeto foi projetada com base em princípios de modularidade e manutenibilidade, permitindo um desenvolvimento ágil e organizado. Aqui estão as razões para a escolha de cada componente:
 
 | Componente       | Descrição                                                                                     |
 |------------------|-----------------------------------------------------------------------------------------------|
-| **DTOs**         | Define a estrutura dos dados utilizados para a transferência entre a API e o cliente, garantindo que as informações sejam transmitidas de forma clara e consistente. 📊 |
-| **Data**         | Gerencia a interação com o MongoDB, possibilitando uma configuração modular e reutilizável para acessar e manipular os dados. 🗄️ |
-| **Models**       | Contém as classes que representam a estrutura dos dados de domínio, refletindo a lógica de negócio da aplicação. 📁 |
-| **Repositories** | Proporciona uma abstração sobre o acesso a dados, permitindo que a lógica de negócios e a persistência sejam separadas, o que facilita a testabilidade e manutenção. 🔒 |
-| **Tests**        | Organiza os testes automatizados, assegurando que cada parte do código funcione como esperado e mantenha a qualidade ao longo do desenvolvimento. 🧪 |
-| **WebApi**       | Centraliza a lógica da API, incluindo controladores e configuração, facilitando a implementação e o gerenciamento das rotas da aplicação. ⚙️ |
+| **DTOs** 📋      | Define a estrutura dos dados utilizados para a transferência entre a API e o cliente, garantindo que as informações sejam transmitidas de forma clara e consistente. |
+| **Data** 🗂️      | Gerencia a interação com o MongoDB, possibilitando uma configuração modular e reutilizável para acessar e manipular os dados. |
+| **Models** 📦    | Contém as classes que representam a estrutura dos dados de domínio, refletindo a lógica de negócio da aplicação. |
+| **Repositories** 🔍 | Proporciona uma abstração sobre o acesso a dados, permitindo que a lógica de negócios e a persistência sejam separadas, o que facilita a testabilidade e manutenção. |
+| **Tests** 🧪     | Organiza os testes automatizados, assegurando que cada parte do código funcione como esperado e mantenha a qualidade ao longo do desenvolvimento. |
+| **WebApi** ⚙️    | Centraliza a lógica da API, incluindo controladores e configuração, facilitando a implementação e o gerenciamento das rotas da aplicação. |
 ---
 
 ## 📡 Endpoints da API
