@@ -27,7 +27,8 @@ namespace WebApi.Controllers
         /// <returns>Uma lista de filmes.</returns>
         [HttpGet]
         [Tags("Ler")]
-        [SwaggerOperation(Summary = "Obter todos os filmes", Description = "Retorna uma lista de todos os filmes.")]
+        [SwaggerOperation(Summary = "Obter todos os filmes",
+            Description = "Retorna uma lista de todos os filmes disponíveis no catálogo.")]
         [ProducesResponseType(typeof(IEnumerable<MovieResponseDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetAllMovies()
         {
@@ -43,7 +44,8 @@ namespace WebApi.Controllers
         /// <returns>O filme correspondente ao ID.</returns>
         [HttpGet("{id}")]
         [Tags("Ler")]
-        [SwaggerOperation(Summary = "Obter filme por ID", Description = "Retorna um filme específico com base no ID.")]
+        [SwaggerOperation(Summary = "Obter filme por ID",
+            Description = "Retorna um filme específico com base no ID fornecido.")]
         [ProducesResponseType(typeof(MovieResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<MovieResponseDTO>> GetMovieById(string id)
@@ -63,7 +65,8 @@ namespace WebApi.Controllers
         /// <returns>Uma ação resultante da criação do filme.</returns>
         [HttpPost]
         [Tags("Criar")]
-        [SwaggerOperation(Summary = "Adicionar um novo filme", Description = "Cria um novo filme.")]
+        [SwaggerOperation(Summary = "Adicionar um novo filme",
+            Description = "Cria um novo filme no catálogo com base nos dados fornecidos.")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateMovie([FromBody] MovieRequestDTO movieDto)
@@ -83,19 +86,14 @@ namespace WebApi.Controllers
         /// <returns>Uma ação resultante da atualização do filme.</returns>
         [HttpPut("{id}")]
         [Tags("Atualizar")]
-        [SwaggerOperation(Summary = "Atualizar um filme", Description = "Atualiza um filme existente.")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [SwaggerOperation(Summary = "Atualizar um filme",
+            Description = "Atualiza um filme existente com as novas informações fornecidas.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateMovie(string id, [FromBody] MovieRequestDTO movieDto)
+        public async Task<ActionResult<string>> UpdateMovie(string id, [FromBody] MovieRequestDTO movieDto)
         {
-            if (!ObjectId.TryParse(id, out var objectId))
-            {
-                return BadRequest("ID inválido.");
-            }
-
             var existingMovie = await _movieRepository.GetByIdAsync(id);
-
             if (existingMovie == null)
             {
                 return NotFound();
@@ -105,8 +103,10 @@ namespace WebApi.Controllers
             movieToUpdate.Id = existingMovie.Id;
 
             await _movieRepository.UpdateAsync(id, movieToUpdate);
-            return NoContent();
+
+            return Ok("Filme atualizado com sucesso."); 
         }
+
 
         /// <summary>
         /// Exclui um filme pelo seu ID.
@@ -115,16 +115,12 @@ namespace WebApi.Controllers
         /// <returns>Uma ação resultante da exclusão do filme.</returns>
         [HttpDelete("{id}")]
         [Tags("Deletar")]
-        [SwaggerOperation(Summary = "Excluir um filme", Description = "Remove um filme existente.")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [SwaggerOperation(Summary = "Excluir um filme",
+            Description = "Remove um filme existente do catálogo com base no ID fornecido.")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteMovie(string id)
+        public async Task<ActionResult<string>> DeleteMovie(string id)
         {
-            if (!ObjectId.TryParse(id, out var objectId))
-            {
-                return BadRequest("ID inválido.");
-            }
-
             var existingMovie = await _movieRepository.GetByIdAsync(id);
             if (existingMovie == null)
             {
@@ -132,12 +128,19 @@ namespace WebApi.Controllers
             }
 
             await _movieRepository.DeleteAsync(id);
-            return NoContent();
+
+            return Ok("Filme excluído com sucesso.");
         }
 
+        /// <summary>
+        /// Obtém filmes lançados em um ano específico.
+        /// </summary>
+        /// <param name="year">Ano de lançamento dos filmes.</param>
+        /// <returns>Uma lista de filmes lançados no ano especificado.</returns>
         [HttpGet("year/{year}")]
         [Tags("Ler")]
-        [SwaggerOperation(Summary = "Obter filmes por ano", Description = "Retorna uma lista de filmes lançados em um ano específico.")]
+        [SwaggerOperation(Summary = "Obter filmes por ano",
+            Description = "Retorna uma lista de filmes que foram lançados em um ano específico.")]
         [ProducesResponseType(typeof(IEnumerable<MovieResponseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetMoviesByYear(int year)
