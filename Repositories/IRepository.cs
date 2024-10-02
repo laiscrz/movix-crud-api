@@ -26,13 +26,14 @@ namespace Repositories
         /// Adiciona uma nova entidade assíncronamente.
         /// </summary>
         /// <param name="entity">A entidade a ser adicionada.</param>
-        Task AddAsync(T entity);
+        Task CreateAsync(T entity);
 
         /// <summary>
         /// Atualiza uma entidade existente assíncronamente.
         /// </summary>
+        /// <param name="id">O ID da entidade a ser atualizada.</param>
         /// <param name="entity">A entidade com as novas informações.</param>
-        Task UpdateAsync(T entity);
+        Task UpdateAsync(string id, T entity);
 
         /// <summary>
         /// Exclui uma entidade pelo seu ID assíncronamente.

@@ -1,14 +1,10 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Models;
 using Data;
 
 namespace Repositories
 {
-    /// <summary>
-    /// Implementação do repositório para gerenciar filmes.
-    /// </summary>
     public class MovieRepository : IRepository<MovieModel>
     {
         private readonly IMongoCollection<MovieModel> _movies;
@@ -25,49 +21,53 @@ namespace Repositories
         }
 
         /// <summary>
-        /// Obtém todos os filmes assíncronamente.
+        /// Obtém todas as entidades assíncronamente.
         /// </summary>
-        /// <returns>Uma lista de <see cref="MovieModel"/>.</returns>
+        /// <returns>Uma lista de entidades do tipo <typeparamref name="T"/>.</returns>
         public async Task<IEnumerable<MovieModel>> GetAllAsync()
         {
             return await _movies.Find(movie => true).ToListAsync();
         }
 
         /// <summary>
-        /// Obtém um filme pelo seu ID assíncronamente.
+        /// Obtém uma entidade pelo seu ID assíncronamente.
         /// </summary>
-        /// <param name="id">O ID do filme a ser obtido.</param>
-        /// <returns>O filme correspondente ao ID.</returns>
+        /// <param name="id">O ID da entidade a ser obtida.</param>
+        /// <returns>A entidade do tipo <typeparamref name="T"/> correspondente ao ID.</returns>
         public async Task<MovieModel> GetByIdAsync(string id)
         {
-            return await _movies.Find(Builders<MovieModel>.Filter.Eq(m => m.Id, id)).FirstOrDefaultAsync();
+            var objectId = new ObjectId(id);
+            return await _movies.Find(movie => movie.Id == objectId).FirstOrDefaultAsync();
         }
 
         /// <summary>
-        /// Adiciona um novo filme assíncronamente.
+        /// Adiciona uma nova entidade assíncronamente.
         /// </summary>
-        /// <param name="movie">O filme a ser adicionado.</param>
-        public async Task AddAsync(MovieModel movie)
+        /// <param name="entity">A entidade a ser adicionada.</param>
+        public async Task CreateAsync(MovieModel entity)
         {
-            await _movies.InsertOneAsync(movie);
+            await _movies.InsertOneAsync(entity);
         }
 
         /// <summary>
-        /// Atualiza um filme existente assíncronamente.
+        /// Atualiza uma entidade existente assíncronamente.
         /// </summary>
-        /// <param name="movie">O filme com as novas informações.</param>
-        public async Task UpdateAsync(MovieModel movie)
+        /// <param name="id">O ID da entidade a ser atualizada.</param>
+        /// <param name="entity">A entidade com as novas informações.</param>
+        public async Task UpdateAsync(string id, MovieModel entity)
         {
-            await _movies.ReplaceOneAsync(Builders<MovieModel>.Filter.Eq(m => m.Id, movie.Id), movie);
+            var objectId = new ObjectId(id);
+            await _movies.ReplaceOneAsync(movie => movie.Id == objectId, entity);
         }
 
         /// <summary>
-        /// Exclui um filme pelo seu ID assíncronamente.
+        /// Exclui uma entidade pelo seu ID assíncronamente.
         /// </summary>
-        /// <param name="id">O ID do filme a ser excluído.</param>
+        /// <param name="id">O ID da entidade a ser excluída.</param>
         public async Task DeleteAsync(string id)
         {
-            await _movies.DeleteOneAsync(Builders<MovieModel>.Filter.Eq(m => m.Id, id));
+            var objectId = new ObjectId(id);
+            await _movies.DeleteOneAsync(movie => movie.Id == objectId);
         }
     }
 }
