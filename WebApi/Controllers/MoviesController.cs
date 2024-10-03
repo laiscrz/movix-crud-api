@@ -1,18 +1,20 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Models;
 using Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using DTOs;
-using MongoDB.Bson;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controlador para gerenciar operações relacionadas a filmes.
+    /// </summary>
+    /// <remarks>
+    /// Este controlador fornece endpoints para criar, ler, atualizar 
+    /// e excluir filmes no catálogo.
+    /// </remarks>
     [ApiController]
     [Route("api/[controller]")]
-    public class MoviesController : ControllerBase
+    public class MoviesController : ControllerBase, IMoviesController
     {
         private readonly IMovieRepository _movieRepository;
 
@@ -22,7 +24,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Obtém todos os filmes.
+        /// Obtém todos os filmes disponíveis no catálogo.
         /// </summary>
         /// <returns>Uma lista de filmes.</returns>
         [HttpGet]
@@ -38,10 +40,10 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Obtém um filme pelo seu ID.
+        /// Obtém um filme específico com base no ID fornecido.
         /// </summary>
         /// <param name="id">ID do filme.</param>
-        /// <returns>O filme correspondente ao ID.</returns>
+        /// <returns>O filme correspondente ao ID, se encontrado.</returns>
         [HttpGet("{id}")]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter filme por ID",
@@ -59,10 +61,10 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Adiciona um novo filme.
+        /// Adiciona um novo filme ao catálogo.
         /// </summary>
         /// <param name="movieDto">Modelo do filme a ser adicionado.</param>
-        /// <returns>Uma ação resultante da criação do filme.</returns>
+        /// <returns>Ação resultante da criação do filme.</returns>
         [HttpPost]
         [Tags("Criar")]
         [SwaggerOperation(Summary = "Adicionar um novo filme",
@@ -79,11 +81,11 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Atualiza um filme existente.
+        /// Atualiza as informações de um filme existente.
         /// </summary>
         /// <param name="id">ID do filme a ser atualizado.</param>
         /// <param name="movieDto">Modelo do filme com as novas informações.</param>
-        /// <returns>Uma ação resultante da atualização do filme.</returns>
+        /// <returns>Ação resultante da atualização do filme.</returns>
         [HttpPut("{id}")]
         [Tags("Atualizar")]
         [SwaggerOperation(Summary = "Atualizar um filme",
@@ -107,12 +109,11 @@ namespace WebApi.Controllers
             return Ok("Filme atualizado com sucesso."); 
         }
 
-
         /// <summary>
-        /// Exclui um filme pelo seu ID.
+        /// Exclui um filme do catálogo com base no ID fornecido.
         /// </summary>
         /// <param name="id">ID do filme a ser excluído.</param>
-        /// <returns>Uma ação resultante da exclusão do filme.</returns>
+        /// <returns>Ação resultante da exclusão do filme.</returns>
         [HttpDelete("{id}")]
         [Tags("Deletar")]
         [SwaggerOperation(Summary = "Excluir um filme",
@@ -133,7 +134,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Obtém filmes lançados em um ano específico.
+        /// Obtém uma lista de filmes lançados em um ano específico.
         /// </summary>
         /// <param name="year">Ano de lançamento dos filmes.</param>
         /// <returns>Uma lista de filmes lançados no ano especificado.</returns>
