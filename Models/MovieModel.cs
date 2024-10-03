@@ -17,7 +17,7 @@ namespace Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [SwaggerSchema(Title = "ID", Description = "Identificador único do filme gerado automaticamente pelo MongoDB.")]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        public ObjectId Id { get; set; } 
 
         /// <summary>
         /// Obtém ou define o título do filme.
