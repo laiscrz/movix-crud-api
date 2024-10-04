@@ -33,11 +33,11 @@ namespace Tests.Integration
             // Arrange
             var movie = new MovieModel
             {
-                Titulo = "Teste de Integração",
-                Diretor = "Diretor Exemplo",
-                AnoLancamento = 2024,
-                Genero = new List<string> { "Ação", "Aventura" },
-                Sinopse = "Filme de teste de integração."
+                Titulo = "O Senhor dos Anéis: A Sociedade do Anel",
+                Diretor = "Peter Jackson",
+                AnoLancamento = 2001,
+                Genero = new List<string> { "Ação", "Aventura", "Fantasia" },
+                Sinopse = "Um hobbit chamado Frodo Bolseiro é encarregado de destruir um poderoso anel."
             };
 
             // Act
@@ -47,7 +47,10 @@ namespace Tests.Integration
             var insertedMovie = await _movieRepository.GetByIdAsync(movie.Id.ToString());
             Assert.NotNull(insertedMovie);
             Assert.Equal(movie.Titulo, insertedMovie.Titulo);
+            Assert.Equal(movie.Diretor, insertedMovie.Diretor);
+            Assert.Equal(movie.AnoLancamento, insertedMovie.AnoLancamento);
+            Assert.Equal(movie.Genero, insertedMovie.Genero);
+            Assert.Equal(movie.Sinopse, insertedMovie.Sinopse);
         }
-
     }
 }
