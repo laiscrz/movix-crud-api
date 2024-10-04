@@ -26,63 +26,40 @@ Explore os principais endpoints da API para gerenciar seu catálogo de filmes:
 
 ## 📂 Estrutura do Projeto
 
-### 📦 DTOs
-- **`MovieRequestDTO.cs`**: Recebe informações nas requisições.
-- **`MovieResponseDTO.cs`**: Envia informações nas respostas.
+- **📦 DTOs**: Objetos de transferência de dados para requisições e respostas.
 
-### 🗄️ Data
-- **`IMongoDbSettings.cs`**: Interface para configurações do MongoDB.
-- **`MongoDBFactory.cs`**: Cria a conexão com o MongoDB.
-- **`MongoDbSettings.cs`**: Configurações de acesso ao MongoDB.
+- **🗄️ Data**: Configurações e classes para a conexão com o MongoDB.
 
-### 🗺️ Mapping
-- **`MovieMappingProfile.cs`**: Mapeia entre os DTOs e o modelo de domínio.
+- **🗺️ Mapping**: Mapeamento entre DTOs e modelos de domínio.
 
-### 🎬 Models
-- **`IMovieModel.cs`**: Define a estrutura do modelo de filme.
-- **`MovieModel.cs`**: Implementa a interface e representa um filme.
+- **🎬 Models**: Estruturas que representam os dados da aplicação.
 
-### 🏛️ Repositories
-- **`IMovieRepository.cs`**: Define operações de acesso a dados para filmes.
-- **`IRepository.cs`**: Interface genérica para operações de repositório.
-- **`MovieRepository.cs`**: Lógica de acesso ao banco de dados para filmes.
-- **`Repository.cs`**: Implementação da interface genérica para operações de repositório.
+- **🏛️ Repositories**: Classes para acesso e manipulação de dados no banco.
 
-### 🧪 Tests
-- **Integration**:
-  - **`MoviesControllerIntegrationTests.cs`**: Testes de integração do controlador.
-  - **`MovieRepositoryIntegrationTests.cs`**: Testes de integração do repositório.
-- **Unit**:
-  - **`MovieMappingProfileUnitTests.cs`**: Testes unitários do perfil de mapeamento.
-  - **`MovieModelUnitTests.cs`**: Testes unitários do modelo de filme.
+- **🧪 Tests**: Testes unitários e de integração para garantir a funcionalidade do código.
 
-### ⚙️ WebApi
-- **`IMovieController.cs`**: Interface para operações de CRUD.
-- **`MovieController.cs`**: Controlador de operações de CRUD.
+- **⚙️ WebApi**: Controladores que gerenciam as operações da API.
 
-> **`appsettings.json`**: Configurações gerais, incluindo a string de conexão do MongoDB.
-
+> **`appsettings.json`**: Configurações gerais da aplicação, incluindo a string de conexão do MongoDB.
 
 ---
 
-## Testes 🧪
+## 🔍 Testes
 
-A API Movix CRUD inclui duas categorias principais de testes para garantir a qualidade e a funcionalidade do código:
+A API Movix CRUD possui duas categorias principais de testes:
 
 ### 🧪 Testes Unitários
 
-- **MovieModelUnitTests**: Realiza testes unitários para a classe `MovieModel`, garantindo que a lógica de validação e criação de instâncias funcione corretamente.
-
-- **MovieMappingProfileUnitTests**: Testa o perfil de mapeamento do AutoMapper, assegurando que a conversão entre os DTOs e o modelo de domínio ocorra conforme o esperado.
+- **🎥 MovieModelUnitTests**: Testa a classe `MovieModel` para garantir a validação e criação correta.
+- **🔄 MovieMappingProfileUnitTests**: Valida o mapeamento entre DTOs e modelos de domínio.
 
 ### 🔗 Testes de Integração
 
-- **MoviesControllerIntegrationTests**: Verifica a funcionalidade do controlador de filmes, assegurando que as operações CRUD sejam executadas corretamente.
-
-- **MovieRepositoryIntegrationTests**: Testa o repositório de filmes, validando as operações de acesso a dados no MongoDB.
+- **📋 MoviesControllerIntegrationTests**: Verifica se as operações CRUD do controlador funcionam corretamente.
+- **🔍 MovieRepositoryIntegrationTests**: Testa as operações de acesso a dados no repositório.
 
 > [!WARNING]  
-> **Atenção:** Os testes são executados utilizando o framework xUnit, garantindo que todas as funcionalidades sejam testadas de forma abrangente.
+> **Atenção:** Os testes são realizados com o framework xUnit, assegurando a cobertura de funcionalidades.
 
 ---
 
@@ -101,19 +78,15 @@ http://localhost:5072
 
 ## 💻 Tecnologias
 
-- **IDE**: Visual Studio Code 🖥️
-- **Linguagem**: C# 🟢, .NET 🔵, MongoDB 🍃
+- **IDE**: Visual Studio 🖥️
+- **Linguagem**: C# 🟢
+- **Framework**: .NET 🔵
+- **Banco de Dados**: MongoDB 🍃
+- **Testes**: xUnit 🧪
 
 ---
 
-## 🚀 Execução do Projeto
-
-### 📋 Pré-requisitos
-
-- [.NET SDK](https://dotnet.microsoft.com/download) 🌐
-- [MongoDB](https://www.mongodb.com/) 🍃
-
-### 📥 Instalação
+## ⚙️ Execução do Projeto
 
 1. Clone o repositório:
    ```bash
@@ -121,15 +94,15 @@ http://localhost:5072
    cd movix-crud-api
    ```
 
-2. Configure o MongoDB e atualize `appsettings.json` com a string de conexão.
+2. Configure o MongoDB 🍃 e atualize `appsettings.json` com a string de conexão.
 
-3. **Para executar a API**:
+3. **Para executar a API** 🚀:
    ```bash
    cd WebApi
    dotnet run
    ```
 
-4. **Para executar os testes**:
+4. **Para executar os testes** 🧪:
    ```bash
    cd Tests
    dotnet test
