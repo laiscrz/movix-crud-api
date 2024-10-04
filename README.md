@@ -44,35 +44,49 @@
 
 ## 📂 Estrutura do Projeto
 
-- **Models** 📦: Define a estrutura dos dados de filme e a lógica de negócios.
-  - `IMovieModel.cs`: Interface que define a estrutura do modelo de filme.
-  - `MovieModel.cs`: Implementa a interface e representa um filme.
-
-- **Controllers** 🎮: Interagem com as requisições da API, processando e retornando dados de filmes.
-  - `MovieController.cs`: Controlador que gerencia as operações de CRUD para filmes, utilizando os repositórios para acesso aos dados.
-
-- **DTOs** 📝: Data Transfer Objects para comunicação entre a API e o cliente.
+### 📦 DTOs
   - `MovieRequestDTO.cs`: Estrutura de dados para receber informações de filmes nas requisições.
   - `MovieResponseDTO.cs`: Estrutura de dados para enviar informações de filmes nas respostas.
 
-- **Data** 🗄️: Configurações e gerenciamento da conexão com o banco de dados MongoDB.
+### 🗄️ Data
+  - `IMongoDbSettings.cs`: Interface para as configurações do MongoDB.
   - `MongoDBFactory.cs`: Classe responsável por criar a conexão com o MongoDB.
   - `MongoDbSettings.cs`: Classe que contém as configurações de acesso ao MongoDB.
-  - `IMongoDbSettings.cs`: Interface para as configurações do MongoDB.
 
-- **Repositories** 🏛️: Abstração sobre o acesso a dados.
+### 🗺️ Mapping
+  - `MovieMappingProfile.cs`: Perfil de mapeamento do AutoMapper para converter entre os DTOs e o modelo de domínio.
+
+### 🎬 Models
+  - `IMovieModel.cs`: Interface que define a estrutura do modelo de filme.
+  - `MovieModel.cs`: Implementa a interface e representa um filme.
+
+### 🏛️ Repositories
+- **Repositories.csproj**
   - `IMovieRepository.cs`: Interface que define as operações de acesso a dados para filmes.
+  - `IRepository.cs`: Interface genérica para operações de repositório.
   - `MovieRepository.cs`: Implementação da interface que contém a lógica de acesso ao banco de dados para operações de filmes.
+  - `Repository.cs`: Classe que implementa a interface `IRepository`, fornecendo a lógica para as operações de repositório genéricas que podem ser reutilizadas em diferentes entidades.
 
-- **Tests** 🧪: Testes automatizados para garantir a funcionalidade do código.
-  - `Unit/Models`: Testes para o modelo de filmes e suas funcionalidades.
+### 🧪 Tests
+  - **Integration**
+     - **Controller**
+       - `MoviesControllerIntegrationTests.cs`: Testes de integração para o controlador de filmes.
+    - **Repositories**
+      - `MovieRepositoryIntegrationTests.cs`: Testes de integração para o repositório de filmes.
+  - **Unit**
+    - **Mapping**
+      - `MovieMappingProfileUnitTests.cs`: Testes unitários para o perfil de mapeamento.
+    - **Models**
+      - `MovieModelUnitTests.cs`: Testes unitários para o modelo de filme.
 
-- **WebApi** ⚙️: Lógica da API, incluindo configuração e inicialização.
-  - `Program.cs`: Ponto de entrada da aplicação.
-  - `WebApi.http`: Arquivo para testar os endpoints da API.
+### ⚙️ WebApi
+  - **Controllers**
+    - `IMovieController.cs`: Interface que define as operações de CRUD para o controlador de filmes.
+    - `MovieController.cs`: Controlador que gerencia as operações de CRUD para filmes.
 
-- **appsettings.json** ⚙️: Configurações gerais da aplicação, como a string de conexão do MongoDB.
-- **appsettings.Development.json** 🛠️: Configurações específicas para o ambiente de desenvolvimento.
+> - **appsettings.json** ⚙️: Configurações gerais da aplicação, como a string de conexão do MongoDB..
+
+
 ---
 
 ## 📚 Documentação - Swagger
