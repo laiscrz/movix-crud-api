@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IntegrationTests
+namespace Tests.Integration
 {
-    public class MovieRepositoryTests
+    public class MovieRepositoryIntegrationTests
     {
         private MovieRepository _movieRepository;
         private MongoDbFactory _mongoDbFactory;
 
-        public MovieRepositoryTests()
+        public MovieRepositoryIntegrationTests()
         {
             var mongoDbSettings = new MongoDbSettings
             {
@@ -28,7 +28,7 @@ namespace IntegrationTests
         }
 
         [Fact]
-        public async Task CreateMovie_ShouldInsertMovie()
+        public async Task CreateMovie_InsertsMovieIntoDatabase()
         {
             // Arrange
             var movie = new MovieModel
