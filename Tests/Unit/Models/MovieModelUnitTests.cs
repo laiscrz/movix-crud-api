@@ -4,7 +4,7 @@ using Models;
 
 namespace Tests.Unit.Models
 {
-    public class TestesMovieModel
+    public class MovieModelUnitTests
     {
         [Fact]
         public void MovieModel_Deve_Criar_Instancia_Valida()
