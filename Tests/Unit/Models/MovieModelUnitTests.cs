@@ -7,7 +7,7 @@ namespace Tests.Unit.Models
     public class MovieModelUnitTests
     {
         [Fact]
-        public void MovieModel_Deve_Criar_Instancia_Valida()
+        public void MovieModel_Should_Create_Valid_Instance()
         {
             // Arrange
             var movieId = ObjectId.GenerateNewId().ToString();  
@@ -38,7 +38,7 @@ namespace Tests.Unit.Models
         }
 
         [Fact]
-        public void MovieModel_Deve_Ter_Titulo_Obrigatorio()
+        public void MovieModel_Should_Have_Required_Title()
         {
             // Arrange
             var filme = new MovieModel
@@ -61,7 +61,7 @@ namespace Tests.Unit.Models
         }
 
         [Fact]
-        public void MovieModel_Deve_Ter_Diretor_Obrigatorio()
+        public void MovieModel_Should_Have_Required_Director()
         {
             // Arrange
             var filme = new MovieModel
@@ -86,7 +86,7 @@ namespace Tests.Unit.Models
         [Theory]
         [InlineData(1887)]
         [InlineData(2101)]
-        public void MovieModel_Deve_Lancar_Erro_Para_AnoLancamento_Invalido(int anoLancamento)
+        public void MovieModel_Should_Throw_Error_For_Invalid_ReleaseYear(int anoLancamento)
         {
             // Arrange
             var filme = new MovieModel
@@ -110,7 +110,7 @@ namespace Tests.Unit.Models
         }
 
         [Fact]
-        public void MovieModel_Deve_Ter_Sinopse_Maximo_500_Caracteres()
+        public void MovieModel_Should_Have_Synopsis_Maximum_500_Characters()
         {
             // Arrange
             var filme = new MovieModel
