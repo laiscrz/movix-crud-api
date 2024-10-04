@@ -19,7 +19,7 @@ namespace Tests.Integration
             var mongoDbSettings = new MongoDbSettings
             {
                 ConnectionString = "mongodb+srv://lais_db:mongo552258@clusterdatabase.mn5ft.mongodb.net/?retryWrites=true&w=majority&appName=ClusterDatabase",
-                DatabaseName = "TestMovixBD",
+                DatabaseName = "movixBD",
                 CollectionName = "movies"
             };
 
@@ -51,6 +51,32 @@ namespace Tests.Integration
             Assert.Equal(movie.AnoLancamento, insertedMovie.AnoLancamento);
             Assert.Equal(movie.Genero, insertedMovie.Genero);
             Assert.Equal(movie.Sinopse, insertedMovie.Sinopse);
+        }
+
+        [Fact]
+        public async Task GetMoviesByYear_ReturnsMoviesForGivenYear()
+        {
+            // Arrange
+            var year = 2001; 
+            var movie = new MovieModel
+            {
+                Titulo = "Harry Potter e a Pedra Filosofal",
+                Diretor = "Chris Columbus",
+                AnoLancamento = year,
+                Genero = new List<string> { "Aventura", "Fantasia" },
+                Sinopse = "Um menino descobre que é um bruxo e vai para uma escola de magia."
+            };
+
+            // Inserir o filme no banco de dados
+            await _movieRepository.CreateAsync(movie);
+
+            // Act
+            var movies = await _movieRepository.GetMoviesByYearAsync(year);
+
+            // Assert
+            Assert.NotNull(movies);
+            Assert.NotEmpty(movies);
+            Assert.All(movies, m => Assert.Equal(year, m.AnoLancamento));
         }
     }
 }

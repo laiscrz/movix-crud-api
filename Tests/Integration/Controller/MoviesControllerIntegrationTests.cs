@@ -28,18 +28,17 @@ namespace Tests.Integration
             };
         }
 
-
         [Fact]
-        public async Task CreateMovie_ShouldReturnBadRequest_WhenTitleIsNumber()
+        public async Task CreateMovie_ShouldReturnBadRequest_WhenDirectorIsNumber()
         {
             // Arrange
             var invalidMovie = new
             {
-                Titulo = 12345, // Enviando um número inteiro como título
-                Diretor = "Diretor de Teste",
+                Titulo = "A Origem", 
+                Diretor = 12345, 
                 AnoLancamento = 2024,
-                Genero = new List<string> { "Ação" },
-                Sinopse = "Sinopse de teste."
+                Genero = new List<string> {"Ação", "Aventura"  },
+                Sinopse = "Um ladrão que entra nos sonhos das pessoas para roubar suas ideias."
             };
 
             var jsonContent = JsonConvert.SerializeObject(invalidMovie);
@@ -67,7 +66,28 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        [Fact]
+        public async Task CreateMovie_ShouldReturnCreated_WhenMovieIsValid()
+        {
+            // Arrange
+            var validMovie = new MovieRequestDTO
+            {
+                Titulo = "Os Vingadores",
+                Diretor = "Joss Whedon",
+                AnoLancamento = 2012,
+                Genero = new List<string> { "Ação", "Aventura" },
+                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+            };
 
+            var jsonContent = JsonConvert.SerializeObject(validMovie);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await _httpClient.PostAsync("movies", content);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        }
 
         [Fact]
         public async Task GetMoviesByYear_ShouldReturnNotFound_WhenNoMoviesFoundForYear()
@@ -82,18 +102,5 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Fact]
-        public async Task GetMoviesByYear_ShouldReturnOk_WhenMoviesFoundForYear()
-        {
-            // Arrange
-            var year = 2024; //  filmes cadastrados para 2024
-
-            // Act
-            var response = await _httpClient.GetAsync($"movies/year/{year}");
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        }
     }
 }
