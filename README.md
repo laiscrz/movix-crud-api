@@ -7,7 +7,7 @@
 
 ## 🛠️ Funcionalidades e Endpoints da API
 
- Veja os principais endpoints da API para interagir com o catálogo de filmes.
+Explore os principais endpoints da API para gerenciar seu catálogo de filmes:
 
 | Função                                    | Endpoint                     | Método | Descrição                                                                                     |
 |-------------------------------------------|------------------------------|--------|-----------------------------------------------------------------------------------------------|
@@ -27,47 +27,62 @@
 ## 📂 Estrutura do Projeto
 
 ### 📦 DTOs
-  - `MovieRequestDTO.cs`: Estrutura de dados para receber informações de filmes nas requisições.
-  - `MovieResponseDTO.cs`: Estrutura de dados para enviar informações de filmes nas respostas.
+- **`MovieRequestDTO.cs`**: Recebe informações nas requisições.
+- **`MovieResponseDTO.cs`**: Envia informações nas respostas.
 
 ### 🗄️ Data
-  - `IMongoDbSettings.cs`: Interface para as configurações do MongoDB.
-  - `MongoDBFactory.cs`: Classe responsável por criar a conexão com o MongoDB.
-  - `MongoDbSettings.cs`: Classe que contém as configurações de acesso ao MongoDB.
+- **`IMongoDbSettings.cs`**: Interface para configurações do MongoDB.
+- **`MongoDBFactory.cs`**: Cria a conexão com o MongoDB.
+- **`MongoDbSettings.cs`**: Configurações de acesso ao MongoDB.
 
 ### 🗺️ Mapping
-  - `MovieMappingProfile.cs`: Perfil de mapeamento do AutoMapper para converter entre os DTOs e o modelo de domínio.
+- **`MovieMappingProfile.cs`**: Mapeia entre os DTOs e o modelo de domínio.
 
 ### 🎬 Models
-  - `IMovieModel.cs`: Interface que define a estrutura do modelo de filme.
-  - `MovieModel.cs`: Implementa a interface e representa um filme.
+- **`IMovieModel.cs`**: Define a estrutura do modelo de filme.
+- **`MovieModel.cs`**: Implementa a interface e representa um filme.
 
 ### 🏛️ Repositories
-- **Repositories.csproj**
-  - `IMovieRepository.cs`: Interface que define as operações de acesso a dados para filmes.
-  - `IRepository.cs`: Interface genérica para operações de repositório.
-  - `MovieRepository.cs`: Implementação da interface que contém a lógica de acesso ao banco de dados para operações de filmes.
-  - `Repository.cs`: Classe que implementa a interface `IRepository`, fornecendo a lógica para as operações de repositório genéricas que podem ser reutilizadas em diferentes entidades.
+- **`IMovieRepository.cs`**: Define operações de acesso a dados para filmes.
+- **`IRepository.cs`**: Interface genérica para operações de repositório.
+- **`MovieRepository.cs`**: Lógica de acesso ao banco de dados para filmes.
+- **`Repository.cs`**: Implementação da interface genérica para operações de repositório.
 
 ### 🧪 Tests
-  - **Integration**
-     - **Controller**
-       - `MoviesControllerIntegrationTests.cs`: Testes de integração para o controlador de filmes.
-    - **Repositories**
-      - `MovieRepositoryIntegrationTests.cs`: Testes de integração para o repositório de filmes.
-  - **Unit**
-    - **Mapping**
-      - `MovieMappingProfileUnitTests.cs`: Testes unitários para o perfil de mapeamento.
-    - **Models**
-      - `MovieModelUnitTests.cs`: Testes unitários para o modelo de filme.
+- **Integration**:
+  - **`MoviesControllerIntegrationTests.cs`**: Testes de integração do controlador.
+  - **`MovieRepositoryIntegrationTests.cs`**: Testes de integração do repositório.
+- **Unit**:
+  - **`MovieMappingProfileUnitTests.cs`**: Testes unitários do perfil de mapeamento.
+  - **`MovieModelUnitTests.cs`**: Testes unitários do modelo de filme.
 
 ### ⚙️ WebApi
-  - **Controllers**
-    - `IMovieController.cs`: Interface que define as operações de CRUD para o controlador de filmes.
-    - `MovieController.cs`: Controlador que gerencia as operações de CRUD para filmes.
+- **`IMovieController.cs`**: Interface para operações de CRUD.
+- **`MovieController.cs`**: Controlador de operações de CRUD.
 
-> - **appsettings.json** ⚙️: Configurações gerais da aplicação, como a string de conexão do MongoDB..
+> **`appsettings.json`**: Configurações gerais, incluindo a string de conexão do MongoDB.
 
+
+---
+
+## Testes 🧪
+
+A API Movix CRUD inclui duas categorias principais de testes para garantir a qualidade e a funcionalidade do código:
+
+### 🧪 Testes Unitários
+
+- **MovieModelUnitTests**: Realiza testes unitários para a classe `MovieModel`, garantindo que a lógica de validação e criação de instâncias funcione corretamente.
+
+- **MovieMappingProfileUnitTests**: Testa o perfil de mapeamento do AutoMapper, assegurando que a conversão entre os DTOs e o modelo de domínio ocorra conforme o esperado.
+
+### 🔗 Testes de Integração
+
+- **MoviesControllerIntegrationTests**: Verifica a funcionalidade do controlador de filmes, assegurando que as operações CRUD sejam executadas corretamente.
+
+- **MovieRepositoryIntegrationTests**: Testa o repositório de filmes, validando as operações de acesso a dados no MongoDB.
+
+> [!WARNING]  
+> **Atenção:** Os testes são executados utilizando o framework xUnit, garantindo que todas as funcionalidades sejam testadas de forma abrangente.
 
 ---
 
