@@ -7,16 +7,20 @@ namespace DTOs
 {
     /// <summary>
     /// Representa o DTO de resposta para o modelo de filme.
-    /// Este DTO é utilizado para retornar as informações de um filme ao usuário.
+    /// Utilizado para retornar as informações de um filme ao usuário.
+    /// <para>
+    /// O campo Id é tratado como uma string para facilitar a leitura e a utilização na API,
+    /// embora seja originalmente um ObjectId gerado pelo MongoDB.
+    /// </para>
     /// </summary>
     public class MovieResponseDTO
     {
-        // <summary>
-        /// ID do filme, convertido de ObjectId (MongoDB) para string.
-        /// Para melhor leitura e utilização na API.
+        /// <summary>
+        /// Identificador único do filme, convertido de ObjectId (MongoDB) para string
+        /// para melhor legibilidade e interação na API.
         /// </summary>
         [SwaggerSchema(
-            Title = "ID do Filme", 
+            Title = "ID do Filme",
             Description = "Identificador único do filme. Originalmente um ObjectId gerado pelo MongoDB, mas convertido para string para melhor leitura e utilização na API.")]
         [Required(ErrorMessage = "O ID é obrigatório.")]
         public string Id { get; set; }
@@ -48,7 +52,7 @@ namespace DTOs
         /// Ano de lançamento do filme.
         /// </summary>
         [SwaggerSchema(
-            Title = "Ano de Lançamento", 
+            Title = "Ano de Lançamento",
             Description = "Ano de lançamento do filme. O valor deve estar entre 1888 e 2100.")]
         [Required(ErrorMessage = "O ano de lançamento é obrigatório.")]
         [Range(1888, 2100, ErrorMessage = "O ano de lançamento deve estar entre 1888 e 2100.")]
@@ -66,7 +70,7 @@ namespace DTOs
         /// </summary>
         public MovieResponseDTO(MovieModel movie)
         {
-            Id = movie.Id.ToString();  
+            Id = movie.Id.ToString();
             Titulo = movie.Titulo;
             Diretor = movie.Diretor;
             Genero = movie.Genero;
