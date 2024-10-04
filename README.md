@@ -11,12 +11,12 @@
 
 | Função                                    | Endpoint                     | Método | Descrição                                                                                     |
 |-------------------------------------------|------------------------------|--------|-----------------------------------------------------------------------------------------------|
-| ➕ **Adicionar um Filme**                  | `POST /api/movies`          | POST   | Adiciona um novo filme ao catálogo. É necessário fornecer detalhes relevantes como título, sinopse, diretor e ano de lançamento.  |
-| 📜 **Listar Todos os Filmes**             | `GET /api/movies`           | GET    | Retorna uma lista de todos os filmes cadastrados no catálogo. Permite a aplicação de filtros para busca por título ou ano.   |
+| ➕ **Adicionar um Filme**                  | `POST /api/movies`          | POST   | Adiciona um novo filme ao catálogo.   |
+| 📜 **Listar Todos os Filmes**             | `GET /api/movies`           | GET    | Retorna uma lista de todos os filmes cadastrados no catálogo.   |
 | 🔍 **Obter Detalhes de Filme**            | `GET /api/movies/{id}`      | GET    | Acessa informações detalhadas de um filme específico pelo seu ID, permitindo ver todos os atributos do filme.                            |
-| 📅 **Filtrar Filmes por Ano**             | `GET /api/movies/year/{year}` | GET    | Lista todos os filmes lançados em um ano específico. Ideal para facilitar a busca por períodos de lançamento.       |
-| ✏️ **Atualizar um Filme**                  | `PUT /api/movies/{id}`      | PUT    | Atualiza os detalhes de um filme existente. Permite a modificação de qualquer campo, garantindo a atualização das informações conforme necessário.      |
-| ❌ **Excluir um Filme**                    | `DELETE /api/movies/{id}`   | DELETE | Remove um filme do catálogo. Este endpoint deve ser utilizado com cuidado, caso o filme não seja mais necessário.          |
+| 📅 **Filtrar Filmes por Ano**             | `GET /api/movies/year/{year}` | GET    | Lista todos os filmes lançados em um ano específico.       |
+| ✏️ **Atualizar um Filme**                  | `PUT /api/movies/{id}`      | PUT    | Atualiza os detalhes de um filme existente.      |
+| ❌ **Excluir um Filme**                    | `DELETE /api/movies/{id}`   | DELETE | Remove um filme do catálogo.        |
 
 
 > [!IMPORTANT] 
