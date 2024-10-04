@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using DTOs;
+using AutoMapper; 
+using Models;    
 
 namespace WebApi.Controllers
 {
@@ -17,16 +19,18 @@ namespace WebApi.Controllers
     public class MoviesController : ControllerBase, IMoviesController
     {
         private readonly IMovieRepository _movieRepository;
+        private readonly IMapper _mapper; 
 
-        public MoviesController(IMovieRepository movieRepository)
+        public MoviesController(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _mapper = mapper; 
         }
 
         /// <summary>
         /// Obtém todos os filmes disponíveis no catálogo.
         /// </summary>
-        /// <returns>Uma lista de filmes.</returns>
+        /// <returns>Uma lista de <see cref="MovieResponseDTO"/> que representa todos os filmes.</returns>
         [HttpGet]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter todos os filmes",
@@ -35,15 +39,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetAllMovies()
         {
             var movies = await _movieRepository.GetAllAsync();
-            var movieDtos = movies.Select(movie => new MovieResponseDTO(movie)).ToList();
+            var movieDtos = _mapper.Map<List<MovieResponseDTO>>(movies);
             return Ok(movieDtos);
         }
 
         /// <summary>
         /// Obtém um filme específico com base no ID fornecido.
         /// </summary>
-        /// <param name="id">ID do filme.</param>
-        /// <returns>O filme correspondente ao ID, se encontrado.</returns>
+        /// <param name="id">O ID do filme que deseja recuperar.</param>
+        /// <returns>O filme correspondente ao ID fornecido, encapsulado em <see cref="MovieResponseDTO"/>, se encontrado.</returns>
         [HttpGet("{id}")]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter filme por ID",
@@ -57,14 +61,14 @@ namespace WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(new MovieResponseDTO(movie));
+            return Ok(_mapper.Map<MovieResponseDTO>(movie));
         }
 
         /// <summary>
         /// Adiciona um novo filme ao catálogo.
         /// </summary>
-        /// <param name="movieDto">Modelo do filme a ser adicionado.</param>
-        /// <returns>Ação resultante da criação do filme.</returns>
+        /// <param name="movieDto">Modelo de dados do filme a ser adicionado, encapsulado em <see cref="MovieRequestDTO"/>.</param>
+        /// <returns>Ação resultante da criação do filme, incluindo o ID do novo filme.</returns>
         [HttpPost]
         [Tags("Criar")]
         [SwaggerOperation(Summary = "Adicionar um novo filme",
@@ -73,18 +77,18 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateMovie([FromBody] MovieRequestDTO movieDto)
         {
-            var movie = movieDto.ToModel();
+            var movie = _mapper.Map<MovieModel>(movieDto); 
             await _movieRepository.CreateAsync(movie);
 
-            var movieResponseDto = new MovieResponseDTO(movie);
+            var movieResponseDto = _mapper.Map<MovieResponseDTO>(movie); 
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id.ToString() }, movieResponseDto);
         }
 
         /// <summary>
         /// Atualiza as informações de um filme existente.
         /// </summary>
-        /// <param name="id">ID do filme a ser atualizado.</param>
-        /// <param name="movieDto">Modelo do filme com as novas informações.</param>
+        /// <param name="id">O ID do filme a ser atualizado.</param>
+        /// <param name="movieDto">Modelo de dados do filme com as novas informações, encapsulado em <see cref="MovieRequestDTO"/>.</param>
         /// <returns>Ação resultante da atualização do filme.</returns>
         [HttpPut("{id}")]
         [Tags("Atualizar")]
@@ -101,7 +105,7 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            var movieToUpdate = movieDto.ToModel();
+            var movieToUpdate = _mapper.Map<MovieModel>(movieDto); 
             movieToUpdate.Id = existingMovie.Id;
 
             await _movieRepository.UpdateAsync(id, movieToUpdate);
@@ -112,7 +116,7 @@ namespace WebApi.Controllers
         /// <summary>
         /// Exclui um filme do catálogo com base no ID fornecido.
         /// </summary>
-        /// <param name="id">ID do filme a ser excluído.</param>
+        /// <param name="id">O ID do filme a ser excluído.</param>
         /// <returns>Ação resultante da exclusão do filme.</returns>
         [HttpDelete("{id}")]
         [Tags("Deletar")]
@@ -136,8 +140,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// Obtém uma lista de filmes lançados em um ano específico.
         /// </summary>
-        /// <param name="year">Ano de lançamento dos filmes.</param>
-        /// <returns>Uma lista de filmes lançados no ano especificado.</returns>
+        /// <param name="year">O ano de lançamento dos filmes desejados.</param>
+        /// <returns>Uma lista de filmes lançados no ano especificado, encapsulada em <see cref="MovieResponseDTO"/>.</returns>
         [HttpGet("year/{year}")]
         [Tags("Ler")]
         [SwaggerOperation(Summary = "Obter filmes por ano",
@@ -152,7 +156,7 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            var movieDtos = movies.Select(movie => new MovieResponseDTO(movie)).ToList();
+            var movieDtos = _mapper.Map<List<MovieResponseDTO>>(movies); 
             return Ok(movieDtos);
         }
     }

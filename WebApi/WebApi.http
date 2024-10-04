@@ -24,7 +24,7 @@ Accept: application/json
 
 ###
 
-PUT {{WebApi_HostAddress}}/api/movies/66ff4f9f637e3300e3fb625b
+PUT {{WebApi_HostAddress}}/api/movies/66ff57c87852c6511371203e
 Content-Type: application/json
 Accept: application/json
 
@@ -38,7 +38,7 @@ Accept: application/json
 
 ###
 
-DELETE  {{WebApi_HostAddress}}/api/movies/66ff4f9f637e3300e3fb625b
+DELETE  {{WebApi_HostAddress}}/api/movies/66ff57c87852c6511371203e
 Content-Type: application/json
 
 ###

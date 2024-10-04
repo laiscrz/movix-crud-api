@@ -13,6 +13,7 @@ namespace DTOs
     /// embora seja originalmente um ObjectId gerado pelo MongoDB.
     /// </para>
     /// </summary>
+    [SwaggerSchema("Representa o DTO de resposta para o modelo de filme.")]
     public class MovieResponseDTO
     {
         /// <summary>
@@ -23,7 +24,7 @@ namespace DTOs
             Title = "ID do Filme",
             Description = "Identificador único do filme. Originalmente um ObjectId gerado pelo MongoDB, mas convertido para string para melhor leitura e utilização na API.")]
         [Required(ErrorMessage = "O ID é obrigatório.")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Título do filme.
@@ -31,7 +32,7 @@ namespace DTOs
         [SwaggerSchema(Title = "Título", Description = "Título do filme.")]
         [Required(ErrorMessage = "O título é obrigatório.")]
         [StringLength(100, ErrorMessage = "O título não pode exceder 100 caracteres.")]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
 
         /// <summary>
         /// Nome do diretor do filme.
@@ -39,14 +40,14 @@ namespace DTOs
         [SwaggerSchema(Title = "Diretor", Description = "Nome do diretor do filme.")]
         [Required(ErrorMessage = "O diretor é obrigatório.")]
         [StringLength(50, ErrorMessage = "O nome do diretor não pode exceder 50 caracteres.")]
-        public string Diretor { get; set; }
+        public string? Diretor { get; set; }
 
         /// <summary>
         /// Lista de gêneros associados ao filme.
         /// </summary>
         [SwaggerSchema(Title = "Gênero", Description = "Lista de gêneros associados ao filme.")]
         [Required(ErrorMessage = "Pelo menos um gênero é obrigatório.")]
-        public ICollection<string> Genero { get; set; }
+        public ICollection<string>? Genero { get; set; }
 
         /// <summary>
         /// Ano de lançamento do filme.
@@ -63,19 +64,8 @@ namespace DTOs
         /// </summary>
         [SwaggerSchema(Title = "Sinopse", Description = "Sinopse do filme. Limite de 500 caracteres.")]
         [StringLength(500, ErrorMessage = "A sinopse não pode exceder 500 caracteres.")]
-        public string Sinopse { get; set; }
+        public string? Sinopse { get; set; }
 
-        /// <summary>
-        /// Construtor que converte um objeto MovieModel em MovieResponseDTO.
-        /// </summary>
-        public MovieResponseDTO(MovieModel movie)
-        {
-            Id = movie.Id.ToString();
-            Titulo = movie.Titulo;
-            Diretor = movie.Diretor;
-            Genero = movie.Genero;
-            AnoLancamento = movie.AnoLancamento;
-            Sinopse = movie.Sinopse;
-        }
+        
     }
 }

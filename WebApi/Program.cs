@@ -1,9 +1,8 @@
 using Data;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Models;
 using Repositories;
-
+using Mapping;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do MongoDB
@@ -23,6 +22,8 @@ builder.Services.AddScoped<IMovieRepository>(sp =>
 });
 
 builder.Services.AddControllers();
+
+builder.Services.AddAutoMapper(typeof(MovieMappingProfile)); 
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

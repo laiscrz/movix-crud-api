@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{18D68546-68D8-4039-9382-13544F99748B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping", "Mapping\Mapping.csproj", "{78B097BF-4CDD-47F9-94A5-1072F939504C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{18D68546-68D8-4039-9382-13544F99748B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18D68546-68D8-4039-9382-13544F99748B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18D68546-68D8-4039-9382-13544F99748B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B097BF-4CDD-47F9-94A5-1072F939504C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B097BF-4CDD-47F9-94A5-1072F939504C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B097BF-4CDD-47F9-94A5-1072F939504C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B097BF-4CDD-47F9-94A5-1072F939504C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
