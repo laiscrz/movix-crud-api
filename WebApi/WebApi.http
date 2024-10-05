@@ -45,3 +45,10 @@ Content-Type: application/json
 
 GET {{WebApi_HostAddress}}/api/movies/year/2012
 Content-Type: application/json
+
+###
+
+GET {{WebApi_HostAddress}}/api/movies/search?title=Barbie
+Accept: application/json
+
+###

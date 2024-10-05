@@ -28,5 +28,16 @@ namespace Repositories
         {
             return await _collection.Find(movie => movie.AnoLancamento == year).ToListAsync();
         }
+
+        /// <summary>
+        /// Obtém uma lista de filmes cujo título contém uma parte específica do texto.
+        /// </summary>
+        /// <param name="partialTitle">Parte do título para busca.</param>
+        /// <returns>Uma lista de filmes do tipo <see cref="MovieModel"/> que correspondem ao critério de busca.</returns>
+        public async Task<IEnumerable<MovieModel>> GetMoviesByTitleAsync(string partialTitle)
+        {
+            var filter = Builders<MovieModel>.Filter.Regex(movie => movie.Titulo, new MongoDB.Bson.BsonRegularExpression(partialTitle, "i"));
+            return await _collection.Find(filter).ToListAsync();
+        }
     }
 }

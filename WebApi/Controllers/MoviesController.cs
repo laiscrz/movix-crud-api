@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using DTOs;
-using AutoMapper; 
-using Models;    
+using AutoMapper;
+using Models;
 
 namespace WebApi.Controllers
 {
@@ -19,12 +19,12 @@ namespace WebApi.Controllers
     public class MoviesController : ControllerBase, IMoviesController
     {
         private readonly IMovieRepository _movieRepository;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
         public MoviesController(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
-            _mapper = mapper; 
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateMovie([FromBody] MovieRequestDTO movieDto)
         {
-            var movie = _mapper.Map<MovieModel>(movieDto); 
+            var movie = _mapper.Map<MovieModel>(movieDto);
             await _movieRepository.CreateAsync(movie);
 
-            var movieResponseDto = _mapper.Map<MovieResponseDTO>(movie); 
+            var movieResponseDto = _mapper.Map<MovieResponseDTO>(movie);
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id.ToString() }, movieResponseDto);
         }
 
@@ -105,12 +105,12 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            var movieToUpdate = _mapper.Map<MovieModel>(movieDto); 
+            var movieToUpdate = _mapper.Map<MovieModel>(movieDto);
             movieToUpdate.Id = existingMovie.Id;
 
             await _movieRepository.UpdateAsync(id, movieToUpdate);
 
-            return Ok("Filme atualizado com sucesso."); 
+            return Ok("Filme atualizado com sucesso.");
         }
 
         /// <summary>
@@ -156,7 +156,36 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            var movieDtos = _mapper.Map<List<MovieResponseDTO>>(movies); 
+            var movieDtos = _mapper.Map<List<MovieResponseDTO>>(movies);
+            return Ok(movieDtos);
+        }
+
+        /// <summary>
+        /// Busca filmes pelo título parcial.
+        /// </summary>
+        /// <param name="title">Parte do título para busca.</param>
+        /// <returns>Lista de filmes que correspondem ao critério de busca, encapsulada em <see cref="MovieResponseDTO"/>.</returns>
+        [HttpGet("search")]
+        [Tags("Ler")]
+        [SwaggerOperation(Summary = "Buscar filmes por título",
+            Description = "Retorna uma lista de filmes cujo título contém a parte específica fornecida.")]
+        [ProducesResponseType(typeof(IEnumerable<MovieResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<MovieResponseDTO>>> SearchByTitle([FromQuery] string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                return BadRequest("O parâmetro 'title' não pode ser vazio.");
+            }
+
+            var movies = await _movieRepository.GetMoviesByTitleAsync(title);
+            if (movies == null || !movies.Any())
+            {
+                return NotFound("Nenhum filme encontrado com o título especificado.");
+            }
+
+            var movieDtos = _mapper.Map<List<MovieResponseDTO>>(movies);
             return Ok(movieDtos);
         }
     }
