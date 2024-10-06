@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Tests.Integration
 {
-    public class MovieRepositoryIntegrationTests
+    public class MovieRepositoryTests
     {
         private MovieRepository _movieRepository;
         private MongoDbFactory _mongoDbFactory;
 
-        public MovieRepositoryIntegrationTests()
+        public MovieRepositoryTests()
         {
             var mongoDbSettings = new MongoDbSettings
             {

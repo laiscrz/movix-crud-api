@@ -7,12 +7,12 @@ using System.Net;
 
 namespace Tests.Integration
 {
-    public class MoviesControllerIntegrationTests
+    public class MoviesControllerTests
     {
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
 
-        public MoviesControllerIntegrationTests()
+        public MoviesControllerTests()
         {
             // Configuração do AutoMapper
             var config = new MapperConfiguration(cfg =>
@@ -34,10 +34,10 @@ namespace Tests.Integration
             // Arrange
             var invalidMovie = new
             {
-                Titulo = "A Origem", 
-                Diretor = 12345, 
+                Titulo = "A Origem",
+                Diretor = 12345,
                 AnoLancamento = 2024,
-                Genero = new List<string> {"Ação", "Aventura"  },
+                Genero = new List<string> { "Ação", "Aventura" },
                 Sinopse = "Um ladrão que entra nos sonhos das pessoas para roubar suas ideias."
             };
 
@@ -72,11 +72,11 @@ namespace Tests.Integration
             // Arrange
             var validMovie = new MovieRequestDTO
             {
-                Titulo = "Os Vingadores",
-                Diretor = "Joss Whedon",
-                AnoLancamento = 2012,
-                Genero = new List<string> { "Ação", "Aventura" },
-                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+                Titulo = "A Culpa é das Estrelas",
+                Diretor = "Josh Boone",
+                AnoLancamento = 2014,
+                Genero = new List<string> { "Drama", "Romance" },
+                Sinopse = "Dois adolescentes com câncer se apaixonam e vivem uma história de amor intensa e emocionante."
             };
 
             var jsonContent = JsonConvert.SerializeObject(validMovie);
@@ -147,11 +147,11 @@ namespace Tests.Integration
             // Arrange
             var validMovie = new MovieRequestDTO
             {
-                Titulo = "Os Vingadores",
-                Diretor = "Joss Whedon",
-                AnoLancamento = 2012,
-                Genero = new List<string> { "Ação", "Aventura" },
-                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+                Titulo = "O Rei Leão",
+                Diretor = "Roger Allers, Rob Minkoff",
+                AnoLancamento = 1994,
+                Genero = new List<string> { "Animação", "Aventura", "Família" },
+                Sinopse = "Um jovem leão, Simba, foge de casa após a morte de seu pai e retorna anos depois para reclamar seu lugar como rei."
             };
 
             // criando filme
