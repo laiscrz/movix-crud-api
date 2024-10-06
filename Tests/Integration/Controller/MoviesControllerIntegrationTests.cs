@@ -102,5 +102,104 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
+        [Fact]
+        public async Task UpdateMovie_ShouldReturnOk_WhenMovieIsUpdatedSuccessfully()
+        {
+            // Arrange
+            var validMovie = new MovieRequestDTO
+            {
+                Titulo = "Os Vingadores",
+                Diretor = "Joss Whedon",
+                AnoLancamento = 2012,
+                Genero = new List<string> { "Ação", "Aventura" },
+                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+            };
+
+            // Primeiro, crie o filme
+            var jsonContent = JsonConvert.SerializeObject(validMovie);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var createResponse = await _httpClient.PostAsync("movies", content);
+            var createdMovieResponse = JsonConvert.DeserializeObject<MovieResponseDTO>(await createResponse.Content.ReadAsStringAsync());
+
+            // Atualizando o filme
+            var updatedMovie = new MovieRequestDTO
+            {
+                Titulo = "Os Vingadores: Ultimato",
+                Diretor = "Anthony e Joe Russo",
+                AnoLancamento = 2019,
+                Genero = new List<string> { "Ação", "Aventura" },
+                Sinopse = "Os super-heróis se reúnem novamente para combater uma nova ameaça."
+            };
+
+            var updatedJsonContent = JsonConvert.SerializeObject(updatedMovie);
+            var updatedContent = new StringContent(updatedJsonContent, Encoding.UTF8, "application/json");
+
+            // Act
+            var updateResponse = await _httpClient.PutAsync($"movies/{createdMovieResponse?.Id}", updatedContent);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, updateResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteMovie_ShouldReturnOk_WhenMovieIsDeletedSuccessfully()
+        {
+            // Arrange
+            var validMovie = new MovieRequestDTO
+            {
+                Titulo = "Os Vingadores",
+                Diretor = "Joss Whedon",
+                AnoLancamento = 2012,
+                Genero = new List<string> { "Ação", "Aventura" },
+                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+            };
+
+            // criando filme
+            var jsonContent = JsonConvert.SerializeObject(validMovie);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var createResponse = await _httpClient.PostAsync("movies", content);
+            var createdMovieResponse = JsonConvert.DeserializeObject<MovieResponseDTO>(await createResponse.Content.ReadAsStringAsync());
+
+            // Act
+            var deleteResponse = await _httpClient.DeleteAsync($"movies/{createdMovieResponse?.Id}");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, deleteResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task SearchByTitle_ShouldReturnOk_WhenMoviesFound()
+        {
+            // Arrange
+            var validMovie = new MovieRequestDTO
+            {
+                Titulo = "Os Vingadores",
+                Diretor = "Joss Whedon",
+                AnoLancamento = 2012,
+                Genero = new List<string> { "Ação", "Aventura" },
+                Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
+            };
+
+            // Primeiro, crie o filme
+            var jsonContent = JsonConvert.SerializeObject(validMovie);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            await _httpClient.PostAsync("movies", content);
+
+            // Act
+            var searchResponse = await _httpClient.GetAsync($"movies/search?title=Vingadores");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, searchResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task SearchByTitle_ShouldReturnNotFound_WhenNoMoviesFound()
+        {
+            // Act
+            var searchResponse = await _httpClient.GetAsync($"movies/search?title=Inexistente");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, searchResponse.StatusCode);
+        }
     }
 }
