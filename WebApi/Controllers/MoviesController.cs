@@ -110,7 +110,7 @@ namespace WebApi.Controllers
 
             await _movieRepository.UpdateAsync(id, movieToUpdate);
 
-            return Ok("Filme atualizado com sucesso.");
+            return NoContent();
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace WebApi.Controllers
 
             await _movieRepository.DeleteAsync(id);
 
-            return Ok("Filme excluído com sucesso.");
+            return NoContent();
         }
 
         /// <summary>
