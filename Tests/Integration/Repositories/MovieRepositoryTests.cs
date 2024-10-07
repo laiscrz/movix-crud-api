@@ -7,6 +7,11 @@ using Data.Settings;
 
 namespace Tests.Integration
 {
+    /// <summary>
+    /// Testes de integração para o repositório de filmes (MovieRepository).
+    /// Verifica a funcionalidade das operações CRUD no MongoDB, garantindo que as interações 
+    /// com o banco de dados funcionem corretamente.
+    /// </summary>
     public class MovieRepositoryTests
     {
         private MovieRepository _movieRepository;
@@ -25,6 +30,9 @@ namespace Tests.Integration
             _movieRepository = new MovieRepository(_mongoDbContext);
         }
 
+        /// <summary>
+        /// Testa a inserção de um filme no banco de dados.
+        /// </summary>
         [Fact]
         public async Task CreateMovie_InsertsMovieIntoDatabase()
         {
@@ -51,6 +59,9 @@ namespace Tests.Integration
             Assert.Equal(movie.Sinopse, insertedMovie.Sinopse);
         }
 
+        /// <summary>
+        /// Testa a recuperação de filmes por ano de lançamento.
+        /// </summary>
         [Fact]
         public async Task GetMoviesByYear_ReturnsMoviesForGivenYear()
         {
@@ -76,6 +87,9 @@ namespace Tests.Integration
             Assert.All(movies, m => Assert.Equal(year, m.AnoLancamento));
         }
 
+        /// <summary>
+        /// Testa a recuperação de um filme pelo ID.
+        /// </summary>
         [Fact]
         public async Task GetByIdAsync_ReturnsMovieForGivenId()
         {
@@ -103,6 +117,9 @@ namespace Tests.Integration
             Assert.Equal(movie.Sinopse, retrievedMovie.Sinopse);
         }
 
+        /// <summary>
+        /// Testa a atualização de um filme existente.
+        /// </summary>
         [Fact]
         public async Task UpdateAsync_UpdatesExistingMovie()
         {
@@ -138,7 +155,9 @@ namespace Tests.Integration
             Assert.Equal(updatedMovie.Titulo, retrievedMovie.Titulo);
         }
 
-
+        /// <summary>
+        /// Testa a remoção de um filme do banco de dados.
+        /// </summary>
         [Fact]
         public async Task DeleteAsync_RemovesMovieFromDatabase()
         {
@@ -162,6 +181,9 @@ namespace Tests.Integration
             Assert.Null(deletedMovie);
         }
 
+        /// <summary>
+        /// Testa a recuperação de filmes pelo título.
+        /// </summary>
         [Fact]
         public async Task GetMoviesByTitleAsync_ReturnsMoviesForGivenTitle()
         {
@@ -195,8 +217,5 @@ namespace Tests.Integration
             Assert.NotEmpty(movies);
             Assert.All(movies, m => Assert.Contains("Orgulho e Preconceito", m.Titulo));
         }
-
     }
-
-
 }
