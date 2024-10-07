@@ -45,6 +45,19 @@ Explore os principais endpoints da API para gerenciar seu catálogo de filmes:
 
 ---
 
+## 🗺️ AutoMapper
+
+**AutoMapper** é uma biblioteca poderosa que simplifica o mapeamento entre objetos de diferentes tipos, como DTOs e Models, eliminando a necessidade de mapeamentos manuais repetitivos. 🚀✨
+
+### **Por que usar AutoMapper?** 🔧
+
+- **🔄 Redução de Código Repetitivo**: Elimina a necessidade de escrever código de mapeamento manual.
+- **🛠️ Manutenção Facilitada**: Facilita a atualização de mapeamentos centralizados.
+- **🔍 Consistência**: Garante mapeamentos consistentes em toda a aplicação.
+- **⚡ Performance**: Otimizado para desempenho, adequado para a maioria das aplicações.
+  
+---
+
 ## 🔍 Testes
 
 A API Movix CRUD possui duas categorias principais de testes:
@@ -61,7 +74,8 @@ A API Movix CRUD possui duas categorias principais de testes:
 
 ### Resultados dos Testes ✅
 
-No total, foram implementados **22 testes**: **7 unitários** 🧪 e **15 de integração** 🔗. Todos os testes foram executados com sucesso, assegurando a robustez da aplicação.
+- No total, foram implementados **22 testes**: **7 unitários** 🧪 e **15 de integração** 🔗.
+- **Todos os testes foram executados com sucesso**, assegurando a robustez da aplicação.
 
 ![image](https://github.com/user-attachments/assets/b4c8854c-09b1-4f5a-bab2-5db002a55267)
 
@@ -89,6 +103,7 @@ http://localhost:5072
 - **Linguagem**: C# 🟢
 - **Framework**: .NET 🔵
 - **Banco de Dados**: MongoDB 🍃
+- **🔄 Mapeamento de Objetos**: AutoMapper
 - **Testes**: xUnit 🧪
 
 ---
