@@ -51,13 +51,19 @@ A API Movix CRUD possui duas categorias principais de testes:
 
 ### 🧪 Testes Unitários
 
-- **🎥 `MovieModelUnitTests`**: Testa a classe `MovieModel` para garantir a validação e criação correta.
-- **🔄 `MovieMappingProfileUnitTests`**: Valida o mapeamento entre DTOs e modelos de domínio.
+- **🎥 `MovieModelTests`**: Testa a classe `MovieModel` para garantir a validação e criação correta.
+- **🔄 `MovieMappingProfileTests`**: Valida o mapeamento entre DTOs e modelos de domínio.
 
 ### 🔗 Testes de Integração
 
-- **📋 `MoviesControllerIntegrationTests`**: Verifica se as operações do controlador funcionam corretamente.
-- **🔍 `MovieRepositoryIntegrationTests`**: Testa as operações de acesso a dados no repositório.
+- **📋 `MoviesControllerTests`**: Verifica se as operações do controlador funcionam corretamente.
+- **🔍 `MovieRepositoryTests`**: Testa as operações de acesso a dados no repositório.
+
+### Resultados dos Testes ✅
+
+No total, foram implementados **22 testes**: **7 unitários** 🧪 e **15 de integração** 🔗. Todos os testes foram executados com sucesso, assegurando a robustez da aplicação.
+
+![image](https://github.com/user-attachments/assets/b4c8854c-09b1-4f5a-bab2-5db002a55267)
 
 > [!WARNING]  
 > **Atenção:** Os testes são realizados com o framework xUnit, assegurando a cobertura de funcionalidades.
