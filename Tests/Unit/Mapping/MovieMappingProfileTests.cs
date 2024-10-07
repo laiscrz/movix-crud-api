@@ -7,11 +7,16 @@ using Xunit;
 
 namespace Tests.Unit
 {
-    public class MovieMappingProfileUnitTests
+    /// <summary>
+    /// Classe de testes unitários para verificar o mapeamento entre os 
+    /// DTOs e os modelos de domínio
+    /// utilizando o AutoMapper.
+    /// </summary>
+    public class MovieMappingProfileTests
     {
         private readonly IMapper _mapper;
 
-        public MovieMappingProfileUnitTests()
+        public MovieMappingProfileTests()
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -20,6 +25,9 @@ namespace Tests.Unit
             _mapper = config.CreateMapper();
         }
 
+        /// <summary>
+        /// Verifica se o MovieRequestDTO é mapeado corretamente para o MovieModel.
+        /// </summary>
         [Fact]
         public void ShouldMap_MovieRequestDTO_ToMovieModel()
         {
@@ -45,6 +53,9 @@ namespace Tests.Unit
             Assert.Equal(movieRequest.Sinopse, movieModel.Sinopse);
         }
 
+        /// <summary>
+        /// Verifica se o MovieModel é mapeado corretamente para o MovieResponseDTO.
+        /// </summary>
         [Fact]
         public void ShouldMap_MovieModel_ToMovieResponseDTO()
         {
@@ -73,4 +84,3 @@ namespace Tests.Unit
         }
     }
 }
-
