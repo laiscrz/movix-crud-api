@@ -10,7 +10,7 @@ namespace Repositories
     /// Repositório genérico para operações CRUD em uma coleção do MongoDB.
     /// </summary>
     /// <typeparam name="T">Tipo de documento manipulável.</typeparam>
-    public class Repository<T> : IRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly IMongoCollection<T> _collection;
 
@@ -19,7 +19,7 @@ namespace Repositories
         /// </summary>
         /// <param name="mongoDbFactory">Fábrica para obter a conexão com o banco de dados.</param>
         /// <param name="collectionName">Nome da coleção no MongoDB.</param>
-        public Repository(MongoDbFactory mongoDbFactory, string collectionName)
+        public BaseRepository(MongoDbFactory mongoDbFactory, string collectionName)
         {
             _collection = mongoDbFactory.GetCollection<T>(collectionName);
         }

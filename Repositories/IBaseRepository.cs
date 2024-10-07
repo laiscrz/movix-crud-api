@@ -7,7 +7,7 @@ namespace Repositories
     /// Interface genérica para repositórios.
     /// </summary>
     /// <typeparam name="T">O tipo da entidade que o repositório gerenciará.</typeparam>
-    public interface IRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         /// <summary>
         /// Obtém todas as entidades assíncronamente.

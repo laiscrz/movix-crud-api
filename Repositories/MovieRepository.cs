@@ -8,7 +8,7 @@ namespace Repositories
     /// <summary>
     /// Implementa o repositório de filmes, fornecendo métodos para operações CRUD e consultas específicas em objetos do tipo <see cref="MovieModel"/>.
     /// </summary>
-    public class MovieRepository : Repository<MovieModel>, IMovieRepository
+    public class MovieRepository : BaseRepository<MovieModel>, IMovieRepository
     {
         /// <summary>
         /// Inicializa uma nova instância da classe <see cref="MovieRepository"/>.
@@ -18,7 +18,7 @@ namespace Repositories
         public MovieRepository(MongoDbFactory mongoDbFactory, MongoDbSettings mongoDbSettings)
             : base(mongoDbFactory, mongoDbSettings.CollectionName)
         {
-            
+
         }
 
         /// <summary>

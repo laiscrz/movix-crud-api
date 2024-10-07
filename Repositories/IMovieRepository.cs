@@ -5,7 +5,7 @@ namespace Repositories
     /// <summary>
     /// Interface para o repositório de filmes, fornecendo métodos específicos para manipulação de objetos do tipo <see cref="MovieModel"/>.
     /// </summary>
-    public interface IMovieRepository : IRepository<MovieModel>
+    public interface IMovieRepository : IBaseRepository<MovieModel>
     {
         /// <summary>
         /// Obtém uma lista de filmes lançados em um ano específico.
