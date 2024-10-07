@@ -7,20 +7,18 @@ using System.Net;
 
 namespace Tests.Integration
 {
+    /// <summary>
+    /// Classe de testes de integração para o MoviesController.
+    /// Contém testes para operações CRUD de filmes na API, verificando o comportamento
+    /// em diferentes cenários, incluindo entradas válidas e inválidas, e os códigos
+    /// de status HTTP esperados.
+    /// </summary>
     public class MoviesControllerTests
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper _mapper;
 
         public MoviesControllerTests()
         {
-            // Configuração do AutoMapper
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<MovieMappingProfile>();
-            });
-            _mapper = config.CreateMapper();
-
             // Configuração do HttpClient
             _httpClient = new HttpClient
             {
@@ -28,6 +26,10 @@ namespace Tests.Integration
             };
         }
 
+        /// <summary>
+        /// Testa a criação de um filme quando o diretor é um número.
+        /// Espera um BadRequest (400).
+        /// </summary>
         [Fact]
         public async Task CreateMovie_ShouldReturnBadRequest_WhenDirectorIsNumber()
         {
@@ -35,7 +37,7 @@ namespace Tests.Integration
             var invalidMovie = new
             {
                 Titulo = "A Origem",
-                Diretor = 12345,
+                Diretor = 12345, // Diretor inválido 
                 AnoLancamento = 2024,
                 Genero = new List<string> { "Ação", "Aventura" },
                 Sinopse = "Um ladrão que entra nos sonhos das pessoas para roubar suas ideias."
@@ -51,6 +53,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a criação de um filme quando a solicitação está vazia.
+        /// Espera um BadRequest (400).
+        /// </summary>
         [Fact]
         public async Task CreateMovie_ShouldReturnBadRequest_WhenMovieRequestIsEmpty()
         {
@@ -66,6 +72,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a criação de um filme válido.
+        /// Espera um Created (201).
+        /// </summary>
         [Fact]
         public async Task CreateMovie_ShouldReturnCreated_WhenMovieIsValid()
         {
@@ -89,6 +99,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a recuperação de filmes por ano quando nenhum filme é encontrado.
+        /// Espera um NotFound (404).
+        /// </summary>
         [Fact]
         public async Task GetMoviesByYear_ShouldReturnNotFound_WhenNoMoviesFoundForYear()
         {
@@ -102,6 +116,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a atualização de um filme.
+        /// Espera um NoContent (204) se a atualização for bem-sucedida.
+        /// </summary>
         [Fact]
         public async Task UpdateMovie_ShouldReturnOk_WhenMovieIsUpdatedSuccessfully()
         {
@@ -141,6 +159,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.NoContent, updateResponse.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a exclusão de um filme.
+        /// Espera um NoContent (204) se a exclusão for bem-sucedida.
+        /// </summary>
         [Fact]
         public async Task DeleteMovie_ShouldReturnOk_WhenMovieIsDeletedSuccessfully()
         {
@@ -167,6 +189,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.NoContent, deleteResponse.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a busca de filmes pelo título quando filmes são encontrados.
+        /// Espera um Ok (200).
+        /// </summary>
         [Fact]
         public async Task SearchByTitle_ShouldReturnOk_WhenMoviesFound()
         {
@@ -191,6 +217,10 @@ namespace Tests.Integration
             Assert.Equal(HttpStatusCode.OK, searchResponse.StatusCode);
         }
 
+        /// <summary>
+        /// Testa a busca de filmes pelo título quando nenhum filme é encontrado.
+        /// Espera um NotFound (404).
+        /// </summary>
         [Fact]
         public async Task SearchByTitle_ShouldReturnNotFound_WhenNoMoviesFound()
         {
