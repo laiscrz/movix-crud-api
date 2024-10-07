@@ -13,20 +13,12 @@ namespace Data
         /// <summary>
         /// Construtor que inicializa uma nova instância da classe <see cref="MongoDbFactory"/>.
         /// </summary>
-        /// <param name="mongoDbSettings">Configurações do MongoDB.</param>
+        /// <param name="mongoDbSettings">Configurações do MongoDB, 
+        /// incluindo a string de conexão e o nome do banco de dados.</param>
         public MongoDbFactory(MongoDbSettings mongoDbSettings)
         {
             var client = new MongoClient(mongoDbSettings.ConnectionString);
             _database = client.GetDatabase(mongoDbSettings.DatabaseName);
-        }
-
-        /// <summary>
-        /// Obtém a instância do banco de dados MongoDB.
-        /// </summary>
-        /// <returns>Uma instância de <see cref="IMongoDatabase"/>.</returns>
-        public IMongoDatabase GetDatabase()
-        {
-            return _database;
         }
 
         /// <summary>
