@@ -10,7 +10,7 @@ namespace Tests.Integration
     public class MovieRepositoryTests
     {
         private MovieRepository _movieRepository;
-        private MongoDbFactory _mongoDbFactory;
+        private MongoDbContext _mongoDbContext;
 
         public MovieRepositoryTests()
         {
@@ -21,8 +21,8 @@ namespace Tests.Integration
                 CollectionName = "movies"
             };
 
-            _mongoDbFactory = new MongoDbFactory(mongoDbSettings);
-            _movieRepository = new MovieRepository(_mongoDbFactory, mongoDbSettings);
+            _mongoDbContext = new MongoDbContext(mongoDbSettings);
+            _movieRepository = new MovieRepository(_mongoDbContext);
         }
 
         [Fact]
@@ -193,7 +193,7 @@ namespace Tests.Integration
             // Assert
             Assert.NotNull(movies);
             Assert.NotEmpty(movies);
-            Assert.Equal(2, movies.Count()); 
+            Assert.Equal(2, movies.Count());
             Assert.All(movies, m => Assert.Contains("Orgulho e Preconceito", m.Titulo));
         }
 

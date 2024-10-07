@@ -10,16 +10,15 @@ namespace Repositories
     /// </summary>
     public class MovieRepository : BaseRepository<MovieModel>, IMovieRepository
     {
-        /// <summary>
-        /// Inicializa uma nova instância da classe <see cref="MovieRepository"/>.
+         /// <summary>
+        /// Inicializa o repositório de filmes com o contexto do MongoDB.
         /// </summary>
-        /// <param name="mongoDbFactory">Fábrica para obter a conexão com o banco de dados.</param>
-        /// <param name="mongoDbSettings">Configurações do MongoDB, incluindo o nome da coleção.</param>
-        public MovieRepository(MongoDbFactory mongoDbFactory, MongoDbSettings mongoDbSettings)
-            : base(mongoDbFactory, mongoDbSettings.CollectionName)
+        /// <param name="context">Instância do <see cref="MongoDbContext"/> para acessar a coleção de filmes.</param>
+        public MovieRepository(MongoDbContext context) : base(context.Movies)
         {
-
+            
         }
+
 
         /// <summary>
         /// Obtém uma lista de filmes lançados em um ano específico.

@@ -14,18 +14,14 @@ builder.Services.Configure<MongoDbSettings>(
 builder.Services.AddSingleton(sp =>
     sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
-builder.Services.AddSingleton<MongoDbFactory>();
+// Registra o MongoDbContext para ser usado nos repositórios
+builder.Services.AddSingleton<MongoDbContext>();
 
 // Registrando o repositório genérico
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 // Registrando o repositório específico de Movie
-builder.Services.AddScoped<IMovieRepository>(sp =>
-{
-    var mongoDbFactory = sp.GetRequiredService<MongoDbFactory>();
-    var mongoDbSettings = sp.GetRequiredService<MongoDbSettings>();
-    return new MovieRepository(mongoDbFactory, mongoDbSettings);
-});
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 builder.Services.AddControllers();
 
@@ -58,7 +54,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movix API v1");
-        c.RoutePrefix = ""; 
+        c.RoutePrefix = "";
     });
 }
 

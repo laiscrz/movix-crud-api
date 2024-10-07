@@ -10,4 +10,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
   </ItemGroup>
 
+ <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
+  </ItemGroup>
 </Project>

@@ -12,16 +12,16 @@ namespace Repositories
     /// <typeparam name="T">Tipo de documento manipulável.</typeparam>
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
+
         protected readonly IMongoCollection<T> _collection;
 
         /// <summary>
         /// Inicializa uma nova instância do repositório.
         /// </summary>
-        /// <param name="mongoDbFactory">Fábrica para obter a conexão com o banco de dados.</param>
-        /// <param name="collectionName">Nome da coleção no MongoDB.</param>
-        public BaseRepository(MongoDbFactory mongoDbFactory, string collectionName)
+        /// <param name="collection">Coleção do MongoDB para o tipo <typeparamref name="T"/>.</param>
+        public BaseRepository(IMongoCollection<T> collection)
         {
-            _collection = mongoDbFactory.GetCollection<T>(collectionName);
+            _collection = collection;
         }
 
         /// <summary>

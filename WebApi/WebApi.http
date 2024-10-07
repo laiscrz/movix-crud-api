@@ -1,15 +1,5 @@
 @WebApi_HostAddress = http://localhost:5072
 
-GET {{WebApi_HostAddress}}/api/movies
-Accept: application/json
-
-###
-
-GET {{WebApi_HostAddress}}/api/movies/6703ce61c668664b6d6433be
-Accept: application/json
-
-###
-
 POST {{WebApi_HostAddress}}/api/movies
 Content-Type: application/json
 Accept: application/json
@@ -24,7 +14,17 @@ Accept: application/json
 
 ###
 
-PUT {{WebApi_HostAddress}}/api/movies/6703ce61c668664b6d6433be
+GET {{WebApi_HostAddress}}/api/movies
+Accept: application/json
+
+###
+
+GET {{WebApi_HostAddress}}/api/movies/67042d6cea41b037cbbb5692
+Accept: application/json
+
+###
+
+PUT {{WebApi_HostAddress}}/api/movies/67042d6cea41b037cbbb5692
 Content-Type: application/json
 Accept: application/json
 
@@ -48,7 +48,7 @@ Accept: application/json
 
 ###
 
-DELETE  {{WebApi_HostAddress}}/api/movies/6703ce61c668664b6d6433be
+DELETE  {{WebApi_HostAddress}}/api/movies/67042d6cea41b037cbbb5692
 Content-Type: application/json
 
 ###
