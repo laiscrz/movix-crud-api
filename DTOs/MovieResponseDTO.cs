@@ -13,7 +13,7 @@ namespace DTOs
     /// embora seja originalmente um ObjectId gerado pelo MongoDB.
     /// </para>
     /// </summary>
-    [SwaggerSchema("Representa o DTO de resposta para o modelo de filme.")]
+    [SwaggerSchema(Title = "MovieResponse",Description = "Representa o DTO de resposta para o modelo de filme.")]
     public class MovieResponseDTO
     {
         /// <summary>
