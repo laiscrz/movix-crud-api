@@ -3,9 +3,7 @@ using MongoDB.Driver;
 using Data;
 using Models;
 using Repositories;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Data.Settings;
 
 namespace Tests.Integration
 {

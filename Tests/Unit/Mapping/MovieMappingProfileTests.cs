@@ -21,7 +21,7 @@ namespace Tests.Unit
         }
 
         [Fact]
-        public void ShouldMapMovieRequestDTOToMovieModel()
+        public void ShouldMap_MovieRequestDTO_ToMovieModel()
         {
             // Arrange
             var movieRequest = new MovieRequestDTO
@@ -46,7 +46,7 @@ namespace Tests.Unit
         }
 
         [Fact]
-        public void ShouldMapMovieModelToMovieResponseDTO()
+        public void ShouldMap_MovieModel_ToMovieResponseDTO()
         {
             // Arrange
             var movieModel = new MovieModel
