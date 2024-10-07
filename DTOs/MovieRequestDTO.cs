@@ -8,7 +8,7 @@ namespace DTOs
     /// Este DTO é utilizado para receber informações sobre um filme ao criar ou atualizar um registro,
     /// sem incluir o ID, pois ele é gerado automaticamente pelo MongoDB.
     /// </summary>
-    [SwaggerSchema(Title = "MovieResquest", Description = "Representa o DTO de requisição para o modelo de filme.")]
+    [SwaggerSchema(Title = "MovieRequest", Description = "Representa o DTO de requisição para o modelo de filme.")]
     public class MovieRequestDTO 
     {
         /// <summary>
