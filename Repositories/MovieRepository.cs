@@ -18,6 +18,7 @@ namespace Repositories
         public MovieRepository(MongoDbFactory mongoDbFactory, MongoDbSettings mongoDbSettings)
             : base(mongoDbFactory, mongoDbSettings.CollectionName)
         {
+            
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace Data
     /// <summary>
     /// Classe responsável por criar e gerenciar a conexão com o banco de dados MongoDB.
     /// </summary>
-    public class MongoDbFactory 
+    public class MongoDbFactory
     {
         private readonly IMongoDatabase _database;
 
@@ -27,6 +27,17 @@ namespace Data
         public IMongoDatabase GetDatabase()
         {
             return _database;
+        }
+
+        /// <summary>
+        /// Obtém uma coleção genérica com base no nome da coleção fornecido.
+        /// </summary>
+        /// <typeparam name="T">Tipo do documento na coleção.</typeparam>
+        /// <param name="collectionName">Nome da coleção no MongoDB.</param>
+        /// <returns>Uma instância de <see cref="IMongoCollection{T}"/>.</returns>
+        public IMongoCollection<T> GetCollection<T>(string collectionName)
+        {
+            return _database.GetCollection<T>(collectionName);
         }
     }
 }

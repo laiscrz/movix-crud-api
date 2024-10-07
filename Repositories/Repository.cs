@@ -21,8 +21,7 @@ namespace Repositories
         /// <param name="collectionName">Nome da coleção no MongoDB.</param>
         public Repository(MongoDbFactory mongoDbFactory, string collectionName)
         {
-            var database = mongoDbFactory.GetDatabase();
-            _collection = database.GetCollection<T>(collectionName);
+            _collection = mongoDbFactory.GetCollection<T>(collectionName);
         }
 
         /// <summary>
