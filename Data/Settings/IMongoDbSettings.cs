@@ -1,23 +1,23 @@
-namespace Data
+namespace Data.Settings
 {
     /// <summary>
-    /// Classe que representa as configurações do MongoDB.
+    /// Interface para as configurações do MongoDB.
     /// </summary>
-    public class MongoDbSettings : IMongoDbSettings
+    public interface IMongoDbSettings
     {
         /// <summary>
         /// String de conexão com o banco de dados MongoDB.
         /// </summary>
-        public string ConnectionString { get; set; } = string.Empty;
+        string ConnectionString { get; set; }
 
         /// <summary>
         /// Nome do banco de dados MongoDB.
         /// </summary>
-        public string DatabaseName { get; set; } = string.Empty;
+        string DatabaseName { get; set; }
 
         /// <summary>
         /// Nome da coleção do MongoDB.
         /// </summary>
-        public string CollectionName { get; set; } = string.Empty;
+        string CollectionName { get; set; }
     }
 }

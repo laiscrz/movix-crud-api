@@ -3,6 +3,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Repositories;
 using Mapping;
+using Data.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do MongoDB

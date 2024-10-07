@@ -1,6 +1,7 @@
 using MongoDB.Driver;
 using Models;
 using Data;
+using Data.Settings;
 
 namespace Repositories
 {

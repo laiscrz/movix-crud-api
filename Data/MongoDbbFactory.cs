@@ -1,3 +1,4 @@
+using Data.Settings;
 using MongoDB.Driver;
 
 namespace Data
@@ -5,7 +6,7 @@ namespace Data
     /// <summary>
     /// Classe responsável por criar e gerenciar a conexão com o banco de dados MongoDB.
     /// </summary>
-    public class MongoDbFactory
+    public class MongoDbFactory 
     {
         private readonly IMongoDatabase _database;
 
