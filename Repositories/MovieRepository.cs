@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using Models;
 using Data;
-using Data.Settings;
+using MongoDB.Bson;
 
 namespace Repositories
 {
@@ -10,13 +10,15 @@ namespace Repositories
     /// </summary>
     public class MovieRepository : BaseRepository<MovieModel>, IMovieRepository
     {
-         /// <summary>
+        private readonly IMongoCollection<MovieModel> _movie; 
+
+        /// <summary>
         /// Inicializa o repositório de filmes com o contexto do MongoDB.
         /// </summary>
         /// <param name="context">Instância do <see cref="MongoDbContext"/> para acessar a coleção de filmes.</param>
         public MovieRepository(MongoDbContext context) : base(context.Movies)
         {
-            
+            _movie = context.Movies; 
         }
 
 
@@ -27,7 +29,7 @@ namespace Repositories
         /// <returns>Uma lista de filmes do tipo <see cref="MovieModel"/> lançados no ano especificado.</returns>
         public async Task<IEnumerable<MovieModel>> GetMoviesByYearAsync(int year)
         {
-            return await _collection.Find(movie => movie.AnoLancamento == year).ToListAsync();
+            return await _movie.Find(movie => movie.AnoLancamento == year).ToListAsync();
         }
 
         /// <summary>
@@ -37,8 +39,8 @@ namespace Repositories
         /// <returns>Uma lista de filmes do tipo <see cref="MovieModel"/> que correspondem ao critério de busca.</returns>
         public async Task<IEnumerable<MovieModel>> GetMoviesByTitleAsync(string partialTitle)
         {
-            var filter = Builders<MovieModel>.Filter.Regex(movie => movie.Titulo, new MongoDB.Bson.BsonRegularExpression(partialTitle, "i"));
-            return await _collection.Find(filter).ToListAsync();
+            var filter = Builders<MovieModel>.Filter.Regex(movie => movie.Titulo, new BsonRegularExpression(partialTitle, "i"));
+            return await _movie.Find(filter).ToListAsync(); 
         }
     }
 }

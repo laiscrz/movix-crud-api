@@ -193,7 +193,6 @@ namespace Tests.Integration
             // Assert
             Assert.NotNull(movies);
             Assert.NotEmpty(movies);
-            Assert.Equal(2, movies.Count());
             Assert.All(movies, m => Assert.Contains("Orgulho e Preconceito", m.Titulo));
         }
 

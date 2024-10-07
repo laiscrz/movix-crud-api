@@ -180,7 +180,6 @@ namespace Tests.Integration
                 Sinopse = "Um grupo de super-heróis se une para salvar o planeta de uma ameaça alienígena."
             };
 
-            // Primeiro, crie o filme
             var jsonContent = JsonConvert.SerializeObject(validMovie);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             await _httpClient.PostAsync("movies", content);
