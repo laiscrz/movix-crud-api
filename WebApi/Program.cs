@@ -16,6 +16,10 @@ builder.Services.AddSingleton(sp =>
 
 builder.Services.AddSingleton<MongoDbFactory>();
 
+// Registrando o repositório genérico
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+// Registrando o repositório específico de Movie
 builder.Services.AddScoped<IMovieRepository>(sp =>
 {
     var mongoDbFactory = sp.GetRequiredService<MongoDbFactory>();
