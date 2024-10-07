@@ -6,6 +6,10 @@ namespace Tests.Unit.Models
 {
     public class MovieModelTests
     {
+        /// <summary>
+        /// Verifica se uma instância de MovieModel pode ser 
+        /// criada com valores válidos.
+        /// </summary>
         [Fact]
         public void MovieModel_Should_Create_Valid_Instance()
         {
@@ -37,6 +41,10 @@ namespace Tests.Unit.Models
             Assert.Equal(sinopse, filme.Sinopse);
         }
 
+        /// <summary>
+        /// Verifica se um MovieModel lança uma exceção de 
+        /// validação quando o título não é fornecido.
+        /// </summary>
         [Fact]
         public void MovieModel_Should_Have_Required_Title()
         {
@@ -60,6 +68,10 @@ namespace Tests.Unit.Models
             });
         }
 
+        /// <summary>
+        /// Verifica se um MovieModel lança uma exceção de 
+        /// validação quando o diretor não é fornecido.
+        /// </summary>
         [Fact]
         public void MovieModel_Should_Have_Required_Director()
         {
@@ -83,6 +95,10 @@ namespace Tests.Unit.Models
             });
         }
 
+        /// <summary>
+        /// Testa se o MovieModel lança um erro para anos de lançamento inválidos.
+        /// Os anos válidos devem estar entre 1888 e 2100.
+        /// </summary>
         [Theory]
         [InlineData(1887)]
         [InlineData(2101)]
@@ -109,6 +125,10 @@ namespace Tests.Unit.Models
             });
         }
 
+        /// <summary>
+        /// Verifica se o MovieModel lança uma exceção de validação 
+        /// quando a sinopse tem mais de 500 caracteres.
+        /// </summary>
         [Fact]
         public void MovieModel_Should_Have_Synopsis_Maximum_500_Characters()
         {
