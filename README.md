@@ -47,6 +47,24 @@ Explore os principais endpoints da API para gerenciar seu catálogo de filmes:
 
 ---
 
+## 🎞️ Modelo de Filme
+
+A classe `MovieModel` representa a estrutura dos filmes na API Movix.
+
+```mermaid
+classDiagram
+    class MovieModel {
+        +ObjectId Id
+        +string Titulo
+        +string Diretor
+        +ICollection<string> Genero
+        +int AnoLancamento
+        +string Sinopse
+    }
+```
+
+---
+
 ## 🗺️ AutoMapper
 
 **AutoMapper** é uma biblioteca poderosa que simplifica o mapeamento entre objetos de diferentes tipos, como DTOs e Models, eliminando a necessidade de mapeamentos manuais repetitivos. 🚀✨
@@ -105,7 +123,7 @@ http://localhost:5072
 - **Linguagem**: C# 🟢
 - **Framework**: .NET 🔵
 - **Banco de Dados**: MongoDB Atlas🍃
-- **🔄 Mapeamento de Objetos**: AutoMapper
+- **Mapeamento de Objetos**: AutoMapper 🔄
 - **Testes**: xUnit 🧪
 
 ---
