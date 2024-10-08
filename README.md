@@ -4,7 +4,7 @@
 
 > Este projeto foi submetido como parte do Checkpoint 5° Avaliativo da disciplina de Advanced Business With .NET. 📚
 
-**Movix** é uma API intuitiva e eficiente projetada para o gerenciamento de filmes, construída com .NET e utilizando o MongoDB como banco de dados. A Movix facilita a realização de operações de CRUD (Criar, Ler, Atualizar e Excluir) em um catálogo de filmes, permitindo que os usuários gerenciem suas coleções de maneira prática e eficaz.
+**Movix** é uma API intuitiva e eficiente projetada para o gerenciamento de filmes, construída com .NET e utilizando o MongoDB Atlas como banco de dados. A Movix facilita a realização de operações de CRUD (Criar, Ler, Atualizar e Excluir) em um catálogo de filmes, permitindo que os usuários gerenciem suas coleções de maneira prática e eficaz.
 
 
 ## 🛠️ Funcionalidades e Endpoints da API
@@ -104,10 +104,18 @@ http://localhost:5072
 - **IDE**: Visual Studio 🖥️
 - **Linguagem**: C# 🟢
 - **Framework**: .NET 🔵
-- **Banco de Dados**: MongoDB 🍃
+- **Banco de Dados**: MongoDB Atlas🍃
 - **🔄 Mapeamento de Objetos**: AutoMapper
 - **Testes**: xUnit 🧪
 
+---
+
+### 🔗 Links Úteis
+
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - Plataforma de banco de dados na nuvem do MongoDB.
+- [Documentação do AutoMapper](https://automapper.org/) - Guia e referências para o AutoMapper.
+- [xUnit](https://xunit.net/) - Framework de testes utilizado no projeto.
+  
 ---
 
 ## ⚙️ Execução do Projeto
