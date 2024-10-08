@@ -52,5 +52,12 @@ namespace WebApi.Controllers
         /// <param name="year">Ano de lançamento dos filmes.</param>
         /// <returns>Uma lista de filmes lançados no ano especificado.</returns>
         Task<ActionResult<IEnumerable<MovieResponseDTO>>> GetMoviesByYear(int year);
+
+        /// <summary>
+        /// Busca filmes pelo título parcial.
+        /// </summary>
+        /// <param name="title">Parte do título para busca.</param>
+        /// <returns>Lista de filmes que correspondem ao critério de busca.</returns>
+        Task<ActionResult<IEnumerable<MovieResponseDTO>>> SearchByTitle(string title);
     }
 }
