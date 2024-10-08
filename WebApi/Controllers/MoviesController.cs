@@ -94,7 +94,7 @@ namespace WebApi.Controllers
         [Tags("Atualizar")]
         [SwaggerOperation(Summary = "Atualizar um filme",
             Description = "Atualiza um filme existente com as novas informações fornecidas.")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> UpdateMovie(string id, [FromBody] MovieRequestDTO movieDto)
@@ -122,7 +122,7 @@ namespace WebApi.Controllers
         [Tags("Deletar")]
         [SwaggerOperation(Summary = "Excluir um filme",
             Description = "Remove um filme existente do catálogo com base no ID fornecido.")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> DeleteMovie(string id)
         {
