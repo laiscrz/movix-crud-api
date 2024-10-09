@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Repositories;
 using Mapping;
 using Data.Settings;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 builder.Services.AddControllers();
 
+// Registro de mapeamento do AutoMapper para converter entidades e DTOs.
 builder.Services.AddAutoMapper(typeof(MovieMappingProfile)); 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -42,6 +44,10 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://github.com/laiscrz/movix-crud-api/blob/main/LICENSE")
         }
     });
+
+    var documentationFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var documentationPath = Path.Combine(AppContext.BaseDirectory, documentationFile);
+    options.IncludeXmlComments(documentationPath);
 
     options.EnableAnnotations();
 });

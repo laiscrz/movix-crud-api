@@ -21,6 +21,11 @@ namespace WebApi.Controllers
         private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Construtor para o controlador de filmes, utilizado para injetar as dependências.
+        /// </summary>
+        /// <param name="movieRepository">Repositório de filmes para interagir com o banco de dados.</param>
+        /// <param name="mapper">Mapper para converter entre modelos de entidade e DTOs.</param>
         public MoviesController(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
